@@ -1,0 +1,43 @@
+---
+// src/pages/gerai.astro
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/sections/Header.astro';
+import Outlets from '@/components/sections/Outlets.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { siteConfig } from '@/data/site.config';
+---
+
+<Layout
+  title={`Gerai Usaha & Layanan - ${siteConfig.name}`}
+  description="Daftar unit gerai dan fasilitas terpadu Koperasi Merah Putih: toko sembako, klinik kesehatan, apotek desa, cold storage, dan logistik."
+>
+  <Header />
+
+  <div class="py-6 bg-surface border-b border-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-xs text-muted" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-red transition-colors">Beranda</a>
+        <span>/</span>
+        <span class="text-ink font-semibold">Unit Gerai &amp; Layanan</span>
+      </nav>
+    </div>
+  </div>
+
+  <Outlets />
+
+  <!-- CTA Banner to Register -->
+  <section class="py-12 bg-[#F2F3F7] border-t border-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-black text-[#065366]">Nikmati Akses Belanja &amp; Layanan Subsidi</h2>
+      <p class="mt-2 text-sm sm:text-base text-muted">Daftar sekarang untuk mendapatkan diskon khusus anggota di seluruh unit gerai Koperasi Merah Putih.</p>
+      <div class="mt-6 flex justify-center gap-3">
+        <a href="/daftar" class="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] bg-brand-red hover:bg-brand-red-dark text-white font-bold text-sm shadow-xs transition-colors">
+          <span>Daftar Keanggotaan</span>
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,47 @@
+---
+// src/components/sections/Stats.astro
+import { siteConfig } from "@/data/site.config";
+
+const stats = siteConfig.impactStats;
+---
+
+<section id="statistik" class="relative py-12 md:py-16 bg-[#F2F3F7] border-y border-border/80 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-red/20 bg-white text-brand-red text-xs font-semibold mb-3 shadow-2xs">
+        <span class="size-2 rounded-full bg-brand-red"></span>
+        <span>Statistik Perputaran Desa</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#065366] tracking-tight">
+        Tumbuh Bersama Warga &amp; Petani Desa
+      </h2>
+      <p class="mt-2 text-sm sm:text-base text-muted">
+        Transparansi dan perputaran ekonomi yang kembali sepenuhnya untuk kemakmuran masyarakat desa.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {stats.map((stat, idx) => (
+        <div class="relative bg-white rounded-[20px] p-5 sm:p-6 shadow-2xs border border-border/80 hover:border-brand-red/30 transition-all flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-muted uppercase tracking-wider">
+              {String(idx + 1).padStart(2, '0')}
+            </span>
+            <span class="size-2 rounded-full bg-brand-red"></span>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-black text-brand-red tracking-tight mb-1">
+              {stat.value}
+            </div>
+            <div class="text-base sm:text-lg font-bold text-ink mb-1.5">
+              {stat.label}
+            </div>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              {stat.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

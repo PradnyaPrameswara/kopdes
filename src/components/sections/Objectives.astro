@@ -1,0 +1,170 @@
+---
+// src/components/sections/Objectives.astro
+interface Objective {
+  id: string;
+  number: string;
+  title: string;
+  tag: string;
+  description: string;
+  metrics: string;
+  icon: 'food' | 'harvest' | 'health' | 'logistics' | 'welfare';
+}
+
+const objectives: Objective[] = [
+  {
+    id: 'pangan',
+    number: '01',
+    title: 'Kedaulatan & Stabilisasi Pangan Murah',
+    tag: 'Pangan Pokok Terjamin',
+    description:
+      'Menyediakan beras premium, minyak goreng, gula, dan telur dengan pasokan langsung dari distributor utama dan BUMN pangan, memangkas rantai tengkulak spekulatif untuk menjamin harga stabil bagi warga.',
+    metrics: 'Harga subsidi resmi terpantau setiap hari',
+    icon: 'food',
+  },
+  {
+    id: 'petani',
+    number: '02',
+    title: 'Perlindungan Petani & Serapan Panen Lokal',
+    tag: 'Ketahanan Pasca-Panen',
+    description:
+      'Menyerap gabah dan hasil panen hortikultura langsung dari petani desa dengan Harga Acuan Pemerintah (HAP) serta mengamankan mutu hasil bumi di fasilitas cold storage 50 ton agar terhindar dari pembusukan.',
+    metrics: 'Kapasitas simpan dingin 50 ton hasil tani',
+    icon: 'harvest',
+  },
+  {
+    id: 'kesehatan',
+    number: '03',
+    title: 'Akses Kesehatan Warga & Obat Terjangkau',
+    tag: 'Kesehatan Siaga 24 Jam',
+    description:
+      'Menghadirkan apotek desa berizin BPOM dengan obat-obatan esensial berharga terjangkau, didukung klinik desa untuk pemeriksaan tensi, gula darah, dan tindakan pertolongan pertama darurat.',
+    metrics: 'Pemeriksaan rutin & klinik siaga warga',
+    icon: 'health',
+  },
+  {
+    id: 'logistik',
+    number: '04',
+    title: 'Efisiensi Distribusi & Logistik Pedesaan',
+    tag: 'Distribusi Tepat Sasaran',
+    description:
+      'Mengoperasikan armada logistik terpadu untuk mengantar sembako ke seluruh pelosok dusun serta mengangkut komoditas tani ke pasar regional dengan biaya transportasi yang jauh lebih hemat.',
+    metrics: 'Jangkauan antar gratis radius 15 km',
+    icon: 'logistics',
+  },
+  {
+    id: 'kesejahteraan',
+    number: '05',
+    title: 'Kesejahteraan Anggota Berbasis Gotong Royong',
+    tag: 'Bagi Hasil SHU Tunai',
+    description:
+      'Memastikan seluruh laba usaha koperasi dikembalikan kepada masyarakat melalui pembagian Sisa Hasil Usaha (SHU) tahunan secara tunai dan transparan berdasarkan keaktifan transaksi setiap anggota.',
+    metrics: '100% perputaran laba kembali ke warga',
+    icon: 'welfare',
+  },
+];
+---
+
+<section id="tujuan" class="py-14 sm:py-20 md:py-24 bg-surface/70 border-b border-border/80 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-red/20 bg-white text-brand-red text-xs font-semibold mb-3 shadow-2xs">
+        <span class="size-2 rounded-full bg-brand-red"></span>
+        <span>Amanat & Sasaran Program</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#065366] tracking-tight leading-tight">
+        Tujuan Utama Koperasi Merah Putih
+      </h2>
+      <p class="mt-3 text-sm sm:text-base md:text-lg text-muted leading-relaxed">
+        Lima pilar strategis yang mendasari pembentukan Koperasi Merah Putih untuk menghapus kemiskinan ekstrem, mewujudkan kedaulatan pangan, dan menggerakkan ekonomi kerakyatan dari desa.
+      </p>
+    </div>
+
+    <!-- Objectives Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
+      {objectives.map((obj) => (
+        <article class="bg-white rounded-[20px] p-6 sm:p-7 border border-border/80 hover:border-[#065366]/30 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+          <div>
+            <!-- Top Card Header -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-border/60">
+              <span class="text-xs font-extrabold text-brand-red tracking-wider">
+                PILAR {obj.number}
+              </span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-surface border border-border text-muted">
+                {obj.tag}
+              </span>
+            </div>
+
+            <!-- Icon & Title -->
+            <div class="flex items-start gap-3.5 mb-3">
+              <div class="size-11 rounded-xl bg-surface border border-brand-red/15 text-brand-red flex items-center justify-center shrink-0 group-hover:bg-brand-red group-hover:text-white transition-colors duration-200 shadow-2xs">
+                {obj.icon === 'food' && (
+                  <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                  </svg>
+                )}
+                {obj.icon === 'harvest' && (
+                  <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m2 22 10-10"/><path d="M16 8a6 6 0 0 0-8.5 8.5L2 22"/><path d="M17.5 15H9"/><path d="M15 17.5V9"/><circle cx="17.5" cy="6.5" r="3.5"/>
+                  </svg>
+                )}
+                {obj.icon === 'health' && (
+                  <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5v6"/><path d="M9 8h6"/>
+                  </svg>
+                )}
+                {obj.icon === 'logistics' && (
+                  <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-5l-3-4h-5v10Z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>
+                  </svg>
+                )}
+                {obj.icon === 'welfare' && (
+                  <svg class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-[#065366] leading-snug pt-1">
+                {obj.title}
+              </h3>
+            </div>
+
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-muted leading-relaxed mt-2">
+              {obj.description}
+            </p>
+          </div>
+
+          <!-- Bottom Metric Indicator -->
+          <div class="mt-5 pt-3.5 border-t border-border/60 flex items-center gap-2 text-xs font-semibold text-ink">
+            <svg class="size-4 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span class="line-clamp-1">{obj.metrics}</span>
+          </div>
+        </article>
+      ))}
+
+      <!-- Legal Mandate Banner Card as 6th Tile -->
+      <article class="bg-gradient-to-br from-[#065366] to-[#044352] rounded-[20px] p-6 sm:p-7 text-white flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-bold border border-white/20 mb-4">
+            <span class="size-1.5 rounded-full bg-gold"></span>
+            <span>Dasar Hukum &amp; Mandat</span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-white leading-snug mb-3">
+            Payung Regulasi &amp; Kedaulatan Hukum
+          </h3>
+          <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
+            Beroperasi berdasarkan Instruksi Presiden (Inpres) No. 9 Tahun 2025 dan Peraturan Menteri Koperasi No. 2 Tahun 2025 untuk percepatan kemandirian pangan 80.000 desa di seluruh Indonesia.
+          </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs">
+          <span class="text-white/80 font-medium">Status Kelembagaan:</span>
+          <span class="font-bold text-gold uppercase tracking-wide">Badan Hukum Resmi RI</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
