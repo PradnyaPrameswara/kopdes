@@ -1,0 +1,29 @@
+---
+// src/pages/tentang.astro
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/sections/Header.astro';
+import About from '@/components/sections/About.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { siteConfig } from '@/data/site.config';
+---
+
+<Layout
+  title={`Tentang Koperasi & Amanat Presiden - ${siteConfig.name}`}
+  description="Visi, nilai-nilai gotong royong, dan amanat Presiden Republik Indonesia dalam inisiasi 80.000 Koperasi Merah Putih untuk kedaulatan pangan desa."
+>
+  <Header />
+
+  <div class="py-6 bg-surface border-b border-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-xs text-muted" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-red transition-colors">Beranda</a>
+        <span>/</span>
+        <span class="text-ink font-semibold">Tentang Koperasi</span>
+      </nav>
+    </div>
+  </div>
+
+  <About />
+
+  <Footer />
+</Layout>

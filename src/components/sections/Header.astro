@@ -1,0 +1,81 @@
+---
+// src/components/sections/Header.astro
+import { Image } from "astro:assets";
+import MobileNav from "@/components/islands/MobileNav";
+import { siteConfig } from "@/data/site.config";
+import logoWebp from "@/assets/brand/logo-kopdes.webp";
+
+const navLinks = [
+  { label: "Beranda", href: "/" },
+  { label: "Tujuan", href: "/tujuan" },
+  { label: "Gerai", href: "/gerai" },
+  { label: "Keanggotaan", href: "/keanggotaan" },
+  { label: "Tentang", href: "/tentang" },
+  { label: "Lokasi", href: "/lokasi" },
+  { label: "FAQ", href: "/faq" },
+];
+
+---
+
+<header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b-2 border-brand-red/20 shadow-xs transition-colors">
+  <div class="h-0.5 w-full bg-gradient-to-r from-brand-red via-brand-red to-white"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-18 sm:h-20 gap-4">
+      <!-- Logo + Brand Title -->
+      <a
+        href="#beranda"
+        class="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-lg p-1"
+        aria-label="Koperasi Merah Putih - Kembali ke Beranda"
+      >
+        <div class="h-10 sm:h-11 shrink-0 p-0.5 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <Image
+            src={logoWebp}
+            alt="Logo Koperasi Merah Putih"
+            width={54}
+            height={40}
+            class="h-full w-auto object-contain"
+            loading="eager"
+          />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-base sm:text-lg font-black tracking-tight text-ink leading-tight flex items-center gap-1.5">
+            Koperasi <span class="text-brand-red">Merah Putih</span>
+          </span>
+          <span class="text-[11px] sm:text-xs font-semibold text-muted tracking-wide">
+            Gerakan Ekonomi Rakyat Desa
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Menu Utama Navigasi">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="px-3.5 py-2 text-sm font-medium text-ink/80 hover:text-brand-red hover:bg-surface rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red min-h-[44px] flex items-center justify-center"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Desktop Action CTA & Mobile Trigger -->
+      <div class="flex items-center gap-3">
+        <a
+          href="/daftar"
+          class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-[10px] bg-[#065366] hover:bg-[#044352] text-white text-sm font-bold shadow-xs hover:shadow transition-colors min-h-[44px] gap-1.5"
+        >
+          <span>Daftar Keanggotaan</span>
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Drawer Trigger Island -->
+        <div class="md:hidden">
+          <MobileNav client:media="(max-width: 768px)" whatsappNumber={siteConfig.whatsappNumber} />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -12,20 +12,20 @@
 
 ## 1. Summary & Goals
 
-A single-page landing site presenting Kopdes Merah Putih as a **village retail store**: a place where residents buy staples at affordable prices, access the village pharmacy/clinic, sell their harvests through cold storage and logistics, and sign up as members.
+Single-page site show Kopdes Merah Putih as **village retail store**. Villager buy staples cheap, use pharmacy/clinic, sell crops via cold storage/logistics, join member.
 
 **Primary goals**
-1. Build trust: Merah Putih visual identity, logo in the header, real photos of the store.
-2. Introduce the cooperative's business units/outlets clearly.
-3. Show a retail-style product showcase so the site feels like a store.
-4. Drive action: **register as a member** and **visit/contact the outlet** (WhatsApp, map).
+1. Build trust: Red-white identity, header logo, real store photos.
+2. Show business units/outlets clear.
+3. Show retail product grid like real store.
+4. Drive action: **register member**, **visit/contact outlet** (WhatsApp, map).
 
 **Success metrics**
-- Lighthouse (mobile): Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95.
-- LCP < 2.5 s, CLS < 0.1, INP < 200 ms (4G network).
-- Clicks on "Register as Member" and "WhatsApp" CTAs are trackable (optional events, see §9).
+- Mobile Lighthouse: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95.
+- 4G: LCP < 2.5 s, CLS < 0.1, INP < 200 ms.
+- Track "Register as Member" and "WhatsApp" clicks (optional, see §9).
 
-**Out of scope (v1):** e-commerce/cart/payments, login, member dashboard, CMS, backend/API.
+**Out of scope (v1):** e-commerce, cart, payment, login, member portal, CMS, backend/API.
 
 ---
 
@@ -33,11 +33,11 @@ A single-page landing site presenting Kopdes Merah Putih as a **village retail s
 
 | Persona | Needs | Device |
 |---|---|---|
-| Villagers / prospective members | Know products, prices, opening hours, how to join | Low–mid Android, 4G |
-| Farmers / village MSMEs | Learn about cold storage, warehouse, logistics services | Android |
-| Cooperative board / village government | A credible page to share | Desktop + mobile |
+| Villagers / prospective members | Know products, prices, hours, join steps | Budget Android, 4G |
+| Farmers / village MSMEs | Storage, warehouse, shipping info | Android |
+| Board / village gov | Shareable trust page | Desktop + phone |
 
-Design priority: **mobile-first**, large readable text, lightweight on slow networks.
+Rule: **mobile-first**, big text, fast on slow web.
 
 ---
 
@@ -57,39 +57,39 @@ Design priority: **mobile-first**, large readable text, lightweight on slow netw
 ### 3.1 Prohibitions (hard rules)
 
 **A. No `useEffect`**
-- `useEffect` and `useLayoutEffect` are forbidden everywhere in `src/` — including shadcn-generated files.
-- Alternatives:
+- Ban `useEffect` and `useLayoutEffect` in `src/` — shadcn code too.
+- Use instead:
   - Local state → `useState` / `useReducer`.
-  - Derived data → compute during render / `useMemo`.
-  - Subscribing to browser APIs (media queries, etc.) → `useSyncExternalStore`.
-  - DOM refs → *callback refs*.
-  - Scroll/enter animations → **CSS** (`animation-timeline: view()`, `@starting-style`, Tailwind transitions) or Astro's built-in `<script>` (outside React).
-  - Static content → `.astro` components with zero JS.
-- Enforced via ESLint: `no-restricted-imports` / `no-restricted-syntax` for `useEffect` and `useLayoutEffect`. The build fails on any violation.
+  - Derived values → render time / `useMemo`.
+  - Browser events/media queries → `useSyncExternalStore`.
+  - DOM handles → *callback refs*.
+  - Scroll/view animations → **CSS** (`animation-timeline: view()`, `@starting-style`, Tailwind transitions) or Astro `<script>` (not React).
+  - Pure static content → zero-JS `.astro` components.
+- Block via ESLint rules: `no-restricted-imports` / `no-restricted-syntax` for `useEffect` and `useLayoutEffect`. Build fail on hit.
 
 **B. No Radix**
-- No `@radix-ui/*` or `radix-ui` packages in `package.json`, the lockfile, or any import.
-- shadcn/ui is initialized with **Base UI** as the primitive library.
-- Automated check: `pnpm why radix-ui` and `grep -ri "radix" src package.json` must return nothing.
+- Zero `@radix-ui/*` or `radix-ui` anywhere in `package.json`, the lockfile, or any import.
+- shadcn/ui must use **Base UI** primitives.
+- Verify: `pnpm why radix-ui` and `grep -ri "radix" src package.json` return empty.
 
 **C. No legacy code**
-- No `tailwind.config.js` + `@astrojs/tailwind` (old integration) → use Tailwind v4 CSS-first (`@import "tailwindcss"` + `@theme`).
-- No class components, `defaultProps`, `ReactDOM.render`, `React.FC`, or `forwardRef` (React 19: `ref` is a regular prop).
+- Ban `tailwind.config.js` and `@astrojs/tailwind` → use Tailwind v4 CSS imports (`@import "tailwindcss"` + `@theme`).
+- Ban class components, `defaultProps`, `ReactDOM.render`, `React.FC`, `forwardRef` (React 19 pass `ref` as prop).
 - No CommonJS (`require`, `module.exports`); ESM only.
-- No `var`, implicit `any`, or `@ts-ignore` (use `@ts-expect-error` with a reason if unavoidable).
-- No deprecated libraries.
+- Ban `var`, loose `any`, `@ts-ignore` (use reasoned `@ts-expect-error` if must).
+- Ban old dead packages.
 
 ### 3.2 ⚠️ Conflict to resolve: "install all shadcn components" vs "no useEffect"
 
-Several generated shadcn components **use `useEffect` internally** (commonly `carousel`, `sidebar` + the `use-mobile` hook, and a few others; embla-carousel itself also uses effects internally). Therefore:
+shadcn components hide `useEffect` inside (`carousel`, `sidebar`, `use-mobile`, embla-carousel). Fix plan:
 
-1. Run `shadcn add --all` as requested.
-2. Run the audit script (§12) to find files containing `useEffect`/`useLayoutEffect`.
-3. For each finding, choose one and record it in `docs/shadcn-audit.md`:
-   - **Refactor** to `useSyncExternalStore` / callback refs (e.g. `use-mobile`), or
-   - **Remove** the component and replace it with a CSS solution (e.g. carousel → `scroll-snap`), or
-   - **Do not import it** (quarantine the file in `src/components/ui/_unused/` and exclude it from the bundle).
-4. End state: `grep -r "useEffect\|useLayoutEffect" src` = 0 results.
+1. Run `shadcn add --all`.
+2. Run audit script (§12) find all `useEffect`/`useLayoutEffect`.
+3. Fix each file and log in `docs/shadcn-audit.md`:
+   - **Refactor** to `useSyncExternalStore` / callback refs (e.g. `use-mobile`), OR
+   - **Delete** file, use pure CSS (e.g. carousel → `scroll-snap`), OR
+   - **Isolate** file: move to `src/components/ui/_unused/`, exclude from build.
+4. Final check: `grep -r "useEffect\|useLayoutEffect" src` return 0.
 
 ---
 
@@ -107,80 +107,80 @@ Several generated shadcn components **use `useEffect` internally** (commonly `ca
 | `--color-muted` | `#6B5B5D` | Secondary text |
 | `--color-gold` | `#F2B705` | Small accent (e.g. "Promo" badge) — optional |
 
-- Text contrast at least WCAG AA (4.5:1).
-- Style: clean, warm, modern retail feel; rounded corners (`rounded-2xl`), product cards with soft shadows, moderate use of Merah Putih flag motifs (wavy section dividers or a thin red-white strip).
-- Dark mode: not required in v1.
+- Contrast meet WCAG AA (4.5:1).
+- Feel: clean, warm, modern store; round edge (`rounded-2xl`), soft-shadow cards, subtle red-white Indonesian flag touches.
+- No dark mode in v1.
 
 ---
 
 ## 5. Assets (Required)
 
-> **Honest note on sources:** according to the Tirto article referenced, the central government has **not yet released an official visual identity/logo guideline** for Kopdes Merah Putih to the public; the circulating logo is already widely used by local governments, village websites, and the cooperative's official Instagram account. The logo must therefore be **verified / permission requested** from the Ministry of Cooperatives or the local Kopdes board before production use.
+> **Source note:** Tirto report state central gov **no official logo release yet**; circulating logo come from local gov and Insta. Must **verify / get permission** from Ministry of Cooperatives or local Kopdes board first.
 
 ### 5.1 Asset manifest
 
 | # | Target file | Specification | Required | Suggested source |
 |---|---|---|---|---|
-| 1 | `src/assets/brand/logo-kopdes.png` | **Transparent PNG (alpha)**, width ≥ 1200 px, no white box/halo around edges | ✅ | Official logo from the Kopdes board / Kemenkop / official local government site; if only a JPG exists, remove the background (rembg / Figma), then QA on both red and white backgrounds |
-| 2 | `src/assets/brand/logo-kopdes.svg` | Vector version (if available) for favicon and small sizes | ➖ | Same as #1 |
-| 3 | `src/assets/photos/hero-toko-kopdes.jpg` | Photo of the **Kopdes store/outlet** front view, landscape, ≥ 2400×1350 | ✅ | Original photo owned by the Kopdes (best); or licensed/permitted media (Antara Foto, Kemenkop/local government documentation) |
-| 4 | `src/assets/photos/gerai-sembako.jpg` | Shelves of staples/rice/cooking oil, ≥ 1600 px | ✅ | Unsplash / Pexels / Wikimedia Commons (check license) or original photo |
+| 1 | `src/assets/brand/logo-kopdes.png` | **Transparent PNG (alpha)**, width ≥ 1200 px, no white box/halo | ✅ | Official Kopdes/Kemenkop/gov file; cut background if JPG, test on red + white |
+| 2 | `src/assets/brand/logo-kopdes.svg` | Vector for favicon / small sizes | ➖ | Same as #1 |
+| 3 | `src/assets/photos/hero-toko-kopdes.jpg` | **Store outlet front**, landscape, ≥ 2400×1350 | ✅ | Kopdes real photo (best); legal press photo (Antara, gov) |
+| 4 | `src/assets/photos/gerai-sembako.jpg` | Shelves with rice, oil, food, ≥ 1600 px | ✅ | Stock photo (Unsplash/Pexels/Wikimedia) or real shot |
 | 5 | `src/assets/photos/apotek-klinik-desa.jpg` | Village pharmacy/clinic | ✅ | Same |
-| 6 | `src/assets/photos/cold-storage.jpg` | Cold storage / farm or fish produce | ✅ | Same |
-| 7 | `src/assets/photos/logistik-desa.jpg` | Vehicle/goods delivery | ✅ | Same |
-| 8 | `src/assets/photos/petani-panen.jpg` | Farmers/village MSMEs | ➖ | Same |
-| 9 | `src/assets/photos/produk/*.webp` | Product photos (rice, oil, sugar, eggs, 3 kg LPG, fertilizer, OTC medicine) 800×800, clean background | ✅ | Pexels/Unsplash or original photos |
-| 10 | `src/assets/pattern/merah-putih.svg` | Self-made decorative pattern/ornament | ➖ | Created in Figma |
-| 11 | `public/favicon.svg`, `public/og-image.jpg` | Favicon + OG 1200×630 | ✅ | Derived from logo + hero photo |
+| 6 | `src/assets/photos/cold-storage.jpg` | Cold room / fish / farm crops | ✅ | Same |
+| 7 | `src/assets/photos/logistik-desa.jpg` | Delivery vehicle / boxes | ✅ | Same |
+| 8 | `src/assets/photos/petani-panen.jpg` | Harvest / village business | ➖ | Same |
+| 9 | `src/assets/photos/produk/*.webp` | Item pictures (rice, oil, sugar, eggs, gas 3kg, fertilizer, meds) 800×800, clean | ✅ | Stock or real photo |
+| 10 | `src/assets/pattern/merah-putih.svg` | Custom flag visual shape | ➖ | Figma export |
+| 11 | `public/favicon.svg`, `public/og-image.jpg` | Icon + OG social card 1200×630 | ✅ | Made from logo + hero photo |
 
 ### 5.2 Quality rules ("HD")
-- Photos: longest side ≥ 1920 px (hero ≥ 2400 px), no pixelation, no watermarks.
-- Keep original masters in `assets-source/` (not bundled); web versions are generated automatically by Astro (`<Picture>` → AVIF + WebP + JPG fallback, responsive `srcset`).
-- Hero loads with `loading="eager"` + `fetchpriority="high"`; everything else `lazy`.
-- Descriptive `alt` text in Indonesian is mandatory.
+- Big side ≥ 1920 px (hero ≥ 2400 px), sharp, no watermarks.
+- Raw files stay in `assets-source/` (not build). Astro auto-make web sizes via `<Picture>` (AVIF/WebP/JPG fallback + `srcset`).
+- Hero use `loading="eager"` + `fetchpriority="high"`. Rest use `lazy`.
+- `alt` text in Indonesian required.
 
 ### 5.3 Licensing & ethics
-- Create `docs/assets-credits.md` listing: file, source (URL), rights holder, license type, download date.
-- Do not use strictly-licensed photos without permission. People whose faces are clearly visible should have consented.
-- Show photo credits in the footer when the license requires it.
-- If the site is not officially run by the Kopdes/Kemenkop, add a footer disclaimer: *"This is not an official government website."* — adjust to the real status.
+- Track assets in `docs/assets-credits.md`: path, source link, owner, license, date.
+- No unlicensed pictures. Get model release for clear human faces.
+- Put photo attribution in footer if license ask.
+- If unofficial site, put footer disclaimer: *"This is not an official government website."*
 
 ---
 
 ## 6. Page Structure & Functional Requirements
 
-A single `/` page with anchor navigation. Static parts are written as `.astro`; **only** truly interactive parts become React islands.
+Single `/` landing with anchor scroll. Static parts use `.astro`. Interactive parts use React islands only.
 
 | # | Section | Content | Implementation |
 |---|---|---|---|
-| 1 | **Header** (sticky) | **Transparent PNG logo** on the left, menu (Home, Outlets, Products, Membership, Location, FAQ), "Register as Member" CTA button. Mobile: hamburger menu → `Sheet` | Logo & desktop menu = Astro; mobile menu = React island `client:media`/`client:visible` |
-| 2 | **Hero** | HD photo of the Kopdes store as background/main image, headline, subheadline, 2 CTAs (Register as Member, View Products), red-white strip | Astro + `<Picture>` |
-| 3 | **Stats/Impact** | 3–4 numbers (e.g. member count, product count, opening hours) — numbers live in `site.config.ts`, not hard-coded in markup | Astro; count-up via CSS, **not** effects |
-| 4 | **Outlets & Services** | Business unit cards: Grocery Outlet, Village Pharmacy, Village Clinic, Cold Storage/Warehouse, Village Logistics, Cooperative Office, Savings & Loans (see note §6.1) | Astro + shadcn `Card`, `Badge` |
-| 5 | **Product Showcase** | Retail grid: photo, name, unit, price (dummy data), "Promo/In stock" badge. Category tabs (Staples, Health, Agriculture). "Ask via WhatsApp" button per product | React island: `Tabs` (Base UI), filtering with `useState`; data from `src/data/products.ts` |
-| 6 | **About & Benefits** | Brief cooperative vision: gotong royong, shortening supply chains, stable prices, transparency | Astro |
-| 7 | **How to Become a Member** | Steps 1-2-3 (resident of the village/sub-district, bring ID card, fill in the form, pay the savings contribution per local rules) | Astro (ordered steps) |
-| 8 | **Gallery** | Photo grid of the outlet & activities; click opens a `Dialog` lightbox | React island `client:visible` |
-| 9 | **Testimonials** | 3 resident quotes (dummy, clearly marked as examples until replaced) | Astro — **no JS carousel**; grid or CSS scroll-snap |
-| 10 | **Location & Hours** | Address, opening hours, WhatsApp/phone buttons, lazy iframe map embed or Google Maps link | Astro |
-| 11 | **FAQ** | Accordion with 6–8 questions | shadcn `Accordion` (Base UI) |
-| 12 | **Closing CTA** | Red banner: "Join the Merah Putih Cooperative" | Astro |
-| 13 | **Footer** | Logo, navigation, contacts, social media, asset credits, disclaimer, © year | Astro |
+| 1 | **Header** (sticky) | **Transparent PNG logo** left, links (Home, Outlets, Products, Membership, Location, FAQ), CTA button. Mobile: hamburger → `Sheet` | Desktop & logo = Astro; mobile menu = React island `client:media`/`client:visible` |
+| 2 | **Hero** | Big HD outlet photo, headline, subhead, 2 CTAs (Join, See Goods), red-white line | Astro + `<Picture>` |
+| 3 | **Stats/Impact** | 3–4 numbers (members, goods count, hours) from `site.config.ts` | Astro; CSS counter, **no JS effect** |
+| 4 | **Outlets & Services** | Unit list cards: Groceries, Meds, Clinic, Cold Storage, Logistics, Office, Loan/Save (see §6.1) | Astro + shadcn `Card`, `Badge` |
+| 5 | **Product Showcase** | Store items: image, title, unit, price (sample), status tag. Filter tabs (Staples, Meds, Farm). "Ask WhatsApp" link per card | React island: Base UI `Tabs`, state filter with `useState`; data in `src/data/products.ts` |
+| 6 | **About & Benefits** | Mission: mutual help, short supply link, fair price, open book | Astro |
+| 7 | **How to Become a Member** | Steps 1-2-3 (local resident, show ID, fill paper, pay fee) | Astro static list |
+| 8 | **Gallery** | Store pictures; click trigger `Dialog` lightbox popup | React island `client:visible` |
+| 9 | **Testimonials** | 3 quote cards from locals (sample copy) | Astro grid or CSS scroll-snap; **no JS slider** |
+| 10 | **Location & Hours** | Street address, work hours, WhatsApp button, map link or lazy embed | Astro |
+| 11 | **FAQ** | Accordion collapse questions | Base UI shadcn `Accordion` |
+| 12 | **Closing CTA** | Big red callout box: "Join Kopdes Merah Putih" | Astro |
+| 13 | **Footer** | Brand mark, page links, phone/chat, social, credits, disclaimer, copyright | Astro |
 
 ### 6.1 Content accuracy notes (important)
-Government/media sources describe the business units **inconsistently**: some cite seven units (cooperative office, staples, savings & loans, clinic, pharmacy, cold storage, logistics), while a December 2025 report says savings & loans will not be run first and adds a fertilizer outlet. Therefore:
-- The outlet list is **configurable** in `src/data/outlets.ts` with status `active | coming-soon | unavailable`.
-- For outlets not yet operating at that location, show a **"Coming soon"** badge; do not claim they are active.
-- All price/product/opening-hour data in v1 is **sample data** and must be replaced with real data before release.
-- National figures (e.g. total legally incorporated cooperatives) may only be used with a source and data date.
+Gov reports disagree on business units (some list 7 units, Dec 2025 report say savings & loans delayed, fertilizer added). Rules:
+- Unit list live in `src/data/outlets.ts` with flag: `active | coming-soon | unavailable`.
+- Inactive units must show **"Coming soon"** badge; no fake active claims.
+- All v1 prices/hours be **sample data**; replace before real launch.
+- Gov stats (e.g. total national co-ops) need link and timestamp.
 
 ### 6.2 Non-functional requirements
-- **Responsive:** 360 px → 1440 px+; default Tailwind breakpoints.
-- **Accessibility:** semantic HTML, correct focus order, `aria-*` from Base UI, skip link, `prefers-reduced-motion` respected, tap targets ≥ 44 px.
-- **SEO:** id-ID `<title>`/meta description, canonical, Open Graph + Twitter card, JSON-LD (`Organization`/`LocalBusiness`), `sitemap.xml` (`@astrojs/sitemap`), `robots.txt`.
-- **Performance:** minimal JS (Astro islands, `client:visible` for below-the-fold), no heavy animation libraries, self-hosted fonts with `font-display: swap`.
-- **Security:** no secrets on the client; external links use `rel="noopener noreferrer"`.
-- **Browsers:** last 2 versions of Chrome, Safari, Firefox, Edge; Android Chrome & iOS Safari.
+- **Layout:** 360 px to 1440 px+ with Tailwind breakpoints.
+- **A11y:** Semantic tags, right tab flow, Base UI `aria-*`, skip-to-content, respect `prefers-reduced-motion`, tap targets ≥ 44 px.
+- **SEO:** id-ID `<title>`/meta description, canonical tags, Open Graph, Twitter card, JSON-LD schema (`Organization`/`LocalBusiness`), `sitemap.xml` via `@astrojs/sitemap`, `robots.txt`.
+- **Speed:** Small JS payloads (islands, `client:visible` lower down), pure CSS motion, local fonts with `font-display: swap`.
+- **Safety:** Zero private keys in client code; links use `rel="noopener noreferrer"`.
+- **Browsers:** Modern Chrome, Safari, Firefox, Edge, Android Chrome, iOS Safari.
 
 ---
 
@@ -212,7 +212,7 @@ kopdes-merah-putih/
    └─ styles/global.css         # @import "tailwindcss"; @theme { ... }
 ```
 
-Principles: data separated from presentation; all types in TypeScript (`type Product`, `type Outlet`, etc.); `@/*` path alias.
+Rules: data files away from views; TypeScript types for data structures (`type Product`, `type Outlet`, etc.); import via `@/*`.
 
 ---
 
@@ -248,14 +248,14 @@ pnpm dlx shadcn@latest add --all
 node scripts/audit-rules.mjs
 ```
 
-**Dev tooling:** ESLint (typescript-eslint, eslint-plugin-astro, jsx-a11y, react-hooks), Prettier + `prettier-plugin-astro` + `prettier-plugin-tailwindcss`, `@astrojs/check`.
+**Code quality tools:** ESLint (typescript-eslint, eslint-plugin-astro, jsx-a11y, react-hooks), Prettier + `prettier-plugin-astro` + `prettier-plugin-tailwindcss`, `@astrojs/check`.
 
 ---
 
 ## 9. Analytics & Contact (optional)
 
-- WhatsApp link: `https://wa.me/<number>?text=<encoded message>` (number in `site.config.ts`).
-- CTA click tracking: use a `data-track` attribute plus one small Astro `<script>` (not a React effect). Lightweight analytics provider (Plausible/Umami) — decision in §13.
+- WhatsApp URL: `https://wa.me/<number>?text=<encoded message>` (phone in `site.config.ts`).
+- Event tracking: use `data-track` plus plain Astro `<script>` (no React effect). Small privacy tracker (Plausible/Umami) — see §13.
 
 ---
 
@@ -275,41 +275,41 @@ node scripts/audit-rules.mjs
 
 ## 11. Acceptance Criteria (Definition of Done)
 
-- [ ] Header shows the **transparent PNG logo** with no box/halo, sharp on retina screens, legible on both white and red backgrounds.
-- [ ] Hero uses a high-resolution **Kopdes store photo**; LCP target met.
-- [ ] All assets exist in the §5 manifest and are recorded in `docs/assets-credits.md`.
-- [ ] `grep -r "useEffect\|useLayoutEffect" src` → **0 results**.
+- [ ] Header has crisp **transparent PNG logo**, no white halo, works on white and red backgrounds.
+- [ ] Hero show sharp **Kopdes store photo**; hit speed target.
+- [ ] Manifest assets exist and logged in `docs/assets-credits.md`.
+- [ ] `grep -r "useEffect\|useLayoutEffect" src` return **0**.
 - [ ] No `radix` in `package.json`, the lockfile, or `src` (§3.1-B).
-- [ ] No legacy patterns (§3.1-C); `astro check` and `tsc --noEmit` clean; ESLint 0 errors.
-- [ ] All shadcn components installed, and the §3.2 audit results are documented.
-- [ ] Lighthouse scores meet §1 targets (mobile).
-- [ ] Keyboard navigation + screen reader work; AA contrast.
-- [ ] Dummy content is clearly marked or replaced with real data.
-- [ ] Disclaimer & photo credits appear in the footer according to the site's status.
+- [ ] Zero old code patterns (§3.1-C); `astro check` pass; `tsc --noEmit` pass; ESLint 0 errors.
+- [ ] shadcn added, audit notes written in §3.2 doc.
+- [ ] Mobile Lighthouse pass §1 numbers.
+- [ ] Keyboard nav and screen reader work; AA color contrast.
+- [ ] Placeholder text tagged or swapped with real copy.
+- [ ] Disclaimer and image credits visible in footer.
 
 ---
 
 ## 12. Audit Script (spec for `scripts/audit-rules.mjs`)
 
-A Node (ESM) script that fails (exit 1) if:
-1. `useEffect` / `useLayoutEffect` appears in `src/**/*.{ts,tsx,astro}`.
-2. The string `radix` appears in `package.json`, `pnpm-lock.yaml`, or `src/**`.
-3. `forwardRef`, `defaultProps`, `ReactDOM.render`, `require(`, `module.exports`, `@astrojs/tailwind`, or a `tailwind.config.*` file is found.
-4. `: any` / `@ts-ignore` appears in `src/**`.
+Node ESM script crash build (exit 1) if:
+1. `useEffect` or `useLayoutEffect` inside `src/**/*.{ts,tsx,astro}`.
+2. String `radix` inside `package.json`, `pnpm-lock.yaml`, or `src/**`.
+3. Hit old patterns: `forwardRef`, `defaultProps`, `ReactDOM.render`, `require(`, `module.exports`, `@astrojs/tailwind`, or `tailwind.config.*`.
+4. Hit `: any` or `@ts-ignore` inside `src/**`.
 
-Run via `pnpm audit:rules` and as a mandatory CI step before build.
+Run with `pnpm audit:rules` in CI before deploy.
 
 ---
 
 ## 13. Open Questions (decisions needed before build)
 
-1. **Site status:** official site of a specific Kopdes, or portfolio/demo? (Determines the disclaimer and logo permission.)
-2. **Kopdes name & location:** village/sub-district name, address, opening hours, WhatsApp number.
-3. **Logo & photos:** do you already have the logo file and real store photos, or should they be sourced from licensed sources?
-4. **List of outlets actually active** at that location (especially savings & loans, clinic, pharmacy).
-5. **Registration form:** is a WhatsApp/Google Form link enough, or is a custom form page needed (requires a backend)?
-6. **Analytics:** needed or not, and which provider.
-7. **Hosting:** Vercel / Netlify / Cloudflare Pages / village hosting.
+1. **Site role:** real village site or preview demo? (Sets disclaimer and logo use rights).
+2. **Kopdes identity:** village name, physical location, operating hours, phone contact.
+3. **Media supply:** real store photos available, or use stock?
+4. **Active outlets:** which actual stalls run today (loans, doctor, meds)?
+5. **Registration flow:** WhatsApp / external form link, or native form page (needs backend)?
+6. **Analytics tool:** want stats, which software?
+7. **Host:** Vercel, Netlify, Cloudflare, or local village server?
 
 ---
 

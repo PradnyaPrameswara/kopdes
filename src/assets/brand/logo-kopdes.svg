@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 512" width="100%" height="100%" fill="none" role="img" aria-label="Logo Resmi Koperasi Desa Merah Putih">
+  <!-- Flagpole at Roof Apex -->
+  <line x1="306" y1="140" x2="306" y2="28" stroke="#64748B" stroke-width="6" stroke-linecap="round" />
+  <circle cx="306" cy="22" r="10" fill="#94A3B8" />
+
+  <!-- Indonesian Flag (Bendera Merah Putih) Waving to the Left -->
+  <!-- Top Red Half -->
+  <path d="M 306 32 C 265 14 235 48 190 38 L 190 84 C 235 94 265 60 306 78 Z" fill="#C5221F" />
+  <!-- Bottom White Half -->
+  <path d="M 306 78 C 265 60 235 94 190 84 L 190 130 C 235 140 265 106 306 124 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+
+  <!-- House Roof & Pillar (Forms the Left House and the Stem of the K) -->
+  <!-- Left eave overhang & roof slope -->
+  <path d="M 12 305 Q 38 322 58 296 L 310 138 L 310 405 Q 296 410 268 392 L 268 215 L 105 316 L 105 470 L 680 470 Q 692 470 692 485 Q 692 500 680 500 L 60 500 Q 50 500 50 490 L 50 326 Q 28 340 12 305 Z" fill="#C5221F" />
+
+  <!-- 4 Small Windows inside the house (4 Nilai Koperasi: Demokrasi, Keterbukaan, Partisipasi, Keadilan) -->
+  <rect x="156" y="295" width="32" height="32" rx="4" fill="#CBD5E1" />
+  <rect x="200" y="295" width="32" height="32" rx="4" fill="#CBD5E1" />
+  <rect x="156" y="339" width="32" height="32" rx="4" fill="#CBD5E1" />
+  <rect x="200" y="339" width="32" height="32" rx="4" fill="#CBD5E1" />
+
+  <!-- Letters "KOP" (Top Row) -->
+  <!-- "K" Arms branching from the center pillar -->
+  <path d="M 326 250 L 418 140 L 458 140 L 372 242 L 466 350 L 424 350 Z" fill="#C5221F" />
+
+  <!-- Letter "O" -->
+  <path fill-rule="evenodd" d="M 548 140 C 496 140 464 185 464 245 C 464 305 496 350 548 350 C 600 350 632 305 632 245 C 632 185 600 140 548 140 Z M 548 184 C 522 184 504 208 504 245 C 504 282 522 306 548 306 C 574 306 592 282 592 245 C 592 208 574 184 548 184 Z" fill="#C5221F" />
+
+  <!-- Letter "P" -->
+  <path fill-rule="evenodd" d="M 645 140 L 730 140 C 765 140 788 160 788 198 C 788 236 765 256 730 256 L 685 256 L 685 350 L 645 350 Z M 685 180 L 726 180 C 744 180 754 187 754 198 C 754 209 744 216 726 216 L 685 216 Z" fill="#C5221F" />
+
+  <!-- Letters "DES" (Bottom Row) -->
+  <!-- Letter "D" -->
+  <path fill-rule="evenodd" d="M 330 260 L 400 260 C 445 260 472 290 472 355 C 472 420 445 450 400 450 L 330 450 Z M 370 298 L 398 298 C 424 298 438 318 438 355 C 438 392 424 412 398 412 L 370 412 Z" fill="#C5221F" />
+
+  <!-- Letter "E" -->
+  <path d="M 490 260 L 590 260 L 590 298 L 530 298 L 530 336 L 580 336 L 580 374 L 530 374 L 530 412 L 592 412 L 592 450 L 490 450 Z" fill="#C5221F" />
+
+  <!-- Letter "S" -->
+  <path d="M 610 422 C 625 438 644 450 668 450 C 700 450 718 434 718 412 C 718 368 642 376 642 316 C 642 284 666 260 702 260 C 724 260 742 270 754 284 L 730 312 C 720 300 710 294 698 294 C 682 294 674 302 674 312 C 674 348 750 342 750 402 C 750 435 722 458 678 458 C 650 458 626 445 610 428 Z" fill="#C5221F" />
+
+  <!-- Wordmark "MERAH PUTIH" in Bold Charcoal -->
+  <text x="330" y="445" font-family="'Geist Variable', sans-serif" font-size="34" font-weight="900" fill="#1E293B" letter-spacing="4">MERAH PUTIH</text>
+</svg>

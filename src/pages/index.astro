@@ -1,16 +1,63 @@
 ---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/sections/Header.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Stats from '@/components/sections/Stats.astro';
+import Objectives from '@/components/sections/Objectives.astro';
+import Outlets from '@/components/sections/Outlets.astro';
+import About from '@/components/sections/About.astro';
+import Membership from '@/components/sections/Membership.astro';
+import { GalleryLightbox } from '@/components/islands/GalleryLightbox';
+import Testimonials from '@/components/sections/Testimonials.astro';
+import Location from '@/components/sections/Location.astro';
+import { FaqAccordion } from '@/components/islands/FaqAccordion';
+import ClosingCTA from '@/components/sections/ClosingCTA.astro';
+import Footer from '@/components/sections/Footer.astro';
+import { siteConfig } from '@/data/site.config';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title={`${siteConfig.name} - ${siteConfig.tagline}`}
+  description={siteConfig.description}
+>
+  <!-- 1. Header (sticky, with MobileNav island) -->
+  <Header />
+
+
+    <!-- 2. Hero Section -->
+    <Hero />
+
+    <!-- 3. Stats Section -->
+    <Stats />
+
+  <!-- 4. Main Objectives Section -->
+  <Objectives />
+
+  <!-- 5. Outlets Showcase Section -->
+    <Outlets />
+
+    <!-- 6. About Section -->
+    <About />
+
+    <!-- 7. Membership Section -->
+    <Membership />
+
+    <!-- 8. GalleryLightbox Island (client:visible) -->
+    <GalleryLightbox client:visible />
+
+    <!-- 9. Testimonials Section (Pure CSS Scroll-Snap) -->
+    <Testimonials />
+
+    <!-- 10. Location Section -->
+    <Location />
+
+    <!-- 11. FaqAccordion Island (client:visible) -->
+    <FaqAccordion client:visible />
+
+    <!-- 12. ClosingCTA Section -->
+    <ClosingCTA />
+
+
+  <!-- 13. Footer -->
+  <Footer />
+</Layout>

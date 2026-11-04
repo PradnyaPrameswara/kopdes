@@ -1,0 +1,122 @@
+---
+import '@fontsource-variable/geist';
+import '../styles/global.css';
+import { siteConfig } from '@/data/site.config';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title = `${siteConfig.name} - ${siteConfig.tagline}`,
+  description = siteConfig.description,
+  image = '/images/og-image.jpg',
+  canonicalURL = Astro.url.href,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = siteConfig.meta.siteUrl;
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CooperativeStore',
+  '@id': `${siteUrl}/#organization`,
+  name: siteConfig.name,
+  alternateName: [siteConfig.shortName, siteConfig.legalName],
+  description: siteConfig.description,
+  url: siteUrl,
+  logo: `${siteUrl}/images/brand/logo-kopdes.webp`,
+  image: fullImageUrl,
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: siteConfig.address.street,
+    addressLocality: siteConfig.address.village,
+    addressRegion: siteConfig.address.province,
+    postalCode: siteConfig.address.postalCode,
+    addressCountry: 'ID',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -6.9175,
+    longitude: 107.6191,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '17:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: '08:00',
+      closes: '14:00',
+    },
+  ],
+  priceRange: 'Rp',
+  sameAs: siteConfig.socialLinks.map((s) => s.url),
+};
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="alternate icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.meta.author} />
+    <meta name="theme-color" content={siteConfig.meta.themeColor} />
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow" />}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.meta.locale} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullImageUrl} />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased selection:bg-brand-red selection:text-white">
+    <!-- Accessible Skip Link to Main Content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-3 focus:bg-brand-red focus:text-white focus:rounded-md focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-gold"
+    >
+      Langsung ke Konten Utama
+    </a>
+
+    <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+      <main id="main-content" class="flex-1">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

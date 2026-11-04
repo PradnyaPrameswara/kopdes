@@ -1,17 +1,17 @@
 # AGENTS.md — Kopdes Merah Putih Landing Page
 
-Agent instructions and engineering standards for the **Koperasi Desa/Kelurahan Merah Putih (Kopdes Merah Putih)** landing page project.
+Agent instructions and engineering standards for **Koperasi Desa/Kelurahan Merah Putih (Kopdes Merah Putih)** landing page project.
 
-All agents operating in this repository must strictly adhere to the rules, constraints, architectural patterns, and skill workflows defined herein.
+All agents must strictly follow rules, constraints, patterns, workflows here.
 
 ---
 
 ## 1. Project Overview & Mission
 
 - **Project:** Koperasi Desa/Kelurahan Merah Putih Landing Page (`kopdes-merah-putih`).
-- **Core Concept:** A high-trust, high-performance single-page landing site presenting Kopdes Merah Putih as a modern village retail store and cooperative hub (gotong royong) offering affordable staples, village pharmacy/clinic, cold storage, agricultural logistics, and member registration.
+- **Core Concept:** High-trust, high-performance single-page landing site for Kopdes Merah Putih: modern village retail, cooperative hub (gotong royong), cheap staples, pharmacy/clinic, cold storage, farm logistics, member registration.
 - **Language & Locale:** Indonesian (`id-ID`).
-- **Target Audience:** Villagers, local farmers, village MSMEs (UMKM), village heads, and cooperative stakeholders.
+- **Target Audience:** Villagers, local farmers, village MSMEs (UMKM), village heads, cooperative stakeholders.
 - **Performance & Quality Targets:**
   - Lighthouse (Mobile 4G): Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95.
   - Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms.
@@ -23,12 +23,12 @@ All agents operating in this repository must strictly adhere to the rules, const
 
 | Layer | Technology | Specification / Configuration |
 |---|---|---|
-| **Framework** | **Astro** (latest stable) | Static site generation (SSG) by default; zero client JS unless an island is explicitly needed. |
-| **Interactive Islands** | **React** (latest stable) | React islands strictly scoped via `client:visible`, `client:media`, or `client:idle`. Never hydrate whole pages. |
+| **Framework** | **Astro** (latest stable) | Static site generation (SSG) default; no client JS unless island explicitly needed. |
+| **Interactive Islands** | **React** (latest stable) | React islands strictly scoped via `client:visible`, `client:media`, `client:idle`. Never hydrate whole pages. |
 | **Styling** | **Tailwind CSS v4** | Modern CSS-first architecture via `@tailwindcss/vite` in `astro.config.ts`. `@import "tailwindcss";` and `@theme` tokens in `src/styles/global.css`. |
 | **UI Components** | **shadcn/ui (Base UI variant)** | Primitives built on **Base UI** (`@base-ui-components/react`). **STRICTLY NO RADIX UI**. |
 | **Type System** | **TypeScript** | Strict mode (`astro/tsconfigs/strict`). No `any`, no implicit types. |
-| **Icons** | **lucide-react** | SVG icons only. Never use emoji as UI icons. |
+| **Icons** | **lucide-react** | SVG icons only. No emoji icons. |
 | **Typography** | **Fontsource Variable** | Self-hosted `@fontsource-variable/plus-jakarta-sans` & `@fontsource-variable/inter`. `font-display: swap`. |
 | **Package Manager** | **pnpm** | Strict dependency isolation. |
 
@@ -36,10 +36,10 @@ All agents operating in this repository must strictly adhere to the rules, const
 
 ## 3. Mandatory Invariants & Hard Prohibitions
 
-These rules are non-negotiable. Any violation causes the automated audit script (`scripts/audit-rules.mjs`) and CI build to fail.
+Rules non-negotiable. Violation breaks automated audit script (`scripts/audit-rules.mjs`) and CI build.
 
 ### Rule A: Strict Prohibition of `useEffect` & `useLayoutEffect`
-- `useEffect` and `useLayoutEffect` are **forbidden everywhere** inside `src/` (including all shadcn components, hooks, and islands).
+- `useEffect` and `useLayoutEffect` **forbidden everywhere** inside `src/` (including all shadcn components, hooks, islands).
 - **Mandatory alternatives:**
   - **Local UI state:** `useState` / `useReducer`.
   - **Derived calculations:** Compute during render or wrap in `useMemo`.
@@ -50,21 +50,21 @@ These rules are non-negotiable. Any violation causes the automated audit script 
 - **Audit Requirement:** `grep -r "useEffect\|useLayoutEffect" src` must return 0 results.
 
 ### Rule B: Absolute Radix UI Ban
-- `@radix-ui/*` and `radix-ui` must never appear in `package.json`, `pnpm-lock.yaml`, or any import path in `src/`.
-- All shadcn/ui components must use the **Base UI** primitive variant.
+- `@radix-ui/*` and `radix-ui` must never appear in `package.json`, `pnpm-lock.yaml`, or import path in `src/`.
+- All shadcn/ui components must use **Base UI** primitive variant.
 - **Audit Requirement:** `pnpm why radix-ui` and `grep -ri "radix" src package.json` must return empty.
 
 ### Rule C: No Legacy Patterns & Strict Type Safety
 - **No legacy Tailwind:** Never create `tailwind.config.js` or use `@astrojs/tailwind`. Use Tailwind v4 `@import "tailwindcss"` and `@theme` directives.
-- **No legacy React:** Never use `React.FC`, `forwardRef` (React 19 passes `ref` as a standard prop), class components, `defaultProps`, or `ReactDOM.render`.
+- **No legacy React:** Never use `React.FC`, `forwardRef` (React 19 passes `ref` as standard prop), class components, `defaultProps`, `ReactDOM.render`.
 - **No CommonJS:** ESM only (`import`/`export`). No `require` or `module.exports`.
-- **Strict TypeScript:** No `var`, no `: any`, no `@ts-ignore`. If a temporary compiler workaround is unavoidable, use `@ts-expect-error` with a mandatory documented reason.
+- **Strict TypeScript:** No `var`, no `: any`, no `@ts-ignore`. If temporary compiler workaround needed, use `@ts-expect-error` with mandatory documented reason.
 
 ### Rule D: shadcn Conflict Resolution Strategy
-When shadcn components are installed (`pnpm dlx shadcn@latest add ...`):
+When shadcn components installed (`pnpm dlx shadcn@latest add ...`):
 1. Immediately run `node scripts/audit-rules.mjs`.
-2. Inspect any component containing `useEffect` (e.g. `use-mobile.ts`, `carousel.tsx`, `sidebar.tsx`).
-3. For each finding, apply one of three resolutions and record it in `docs/shadcn-audit.md`:
+2. Inspect components with `useEffect` (e.g. `use-mobile.ts`, `carousel.tsx`, `sidebar.tsx`).
+3. Apply resolution and record in `docs/shadcn-audit.md`:
    - **Refactor:** Rewrite using `useSyncExternalStore` or callback refs.
    - **Replace:** Swap with pure CSS/Astro (e.g., replace carousel with CSS `scroll-snap-x`).
    - **Quarantine:** Move unused components to `src/components/ui/_unused/` and exclude from compilation.
@@ -90,94 +90,94 @@ Defined in `src/styles/global.css`:
 ```
 
 ### 4.2 Asset Quality Standards
-- **Logo:** `src/assets/brand/logo-kopdes.png` must be a high-resolution transparent PNG (alpha channel, width ≥ 1200px) with no white bounding box or fringing. Must remain crisp and legible against both white and red backgrounds.
+- **Logo:** `src/assets/brand/logo-kopdes.png` must be high-resolution transparent PNG (alpha channel, width ≥ 1200px), no white box or fringing. Must stay crisp on white and red backgrounds.
 - **Store & Section Photos:** Longest edge ≥ 1920px (hero photo ≥ 2400px). Store originals in `assets-source/` (not bundled).
-- **Astro Image Pipeline:** Always use Astro's `<Picture>` or `<Image>` components to emit modern formats (AVIF, WebP) with responsive `srcset` and explicit `width`/`height`.
-- **Loading Strategy:** Hero image uses `loading="eager"` + `fetchpriority="high"`. All below-the-fold images must use `loading="lazy"`.
-- **Credits & Ethics:** Document all photo sources, authors, and licenses in `docs/assets-credits.md`. If running a demo or unverified local instance, include the required footer disclaimer: *"Website ini bukan situs resmi pemerintah."*
+- **Astro Image Pipeline:** Always use Astro `<Picture>` or `<Image>` components for modern formats (AVIF, WebP) with responsive `srcset` and explicit `width`/`height`.
+- **Loading Strategy:** Hero image uses `loading="eager"` + `fetchpriority="high"`. Below-the-fold images use `loading="lazy"`.
+- **Credits & Ethics:** Document photo sources, authors, licenses in `docs/assets-credits.md`. If demo or unverified local instance, include footer disclaimer: *"Website ini bukan situs resmi pemerintah."*
 
 ---
 
 ## 5. Skills Integration & Execution Directives
 
-Agents must invoke and apply the following skills throughout task execution:
+Agents must invoke and apply skills during task:
 
 ### 5.1 `using-superpowers`
-- **Rule:** Before taking any action or writing code, check and invoke the applicable skill.
-- **Priority:** Process skills (brainstorming, systematic-debugging) precede domain and implementation skills.
-- **Stop Red Flags:** Never rationalize skipping a skill with "this is simple" or "let me explore first".
+- **Rule:** Before action or code, check and invoke skill.
+- **Priority:** Process skills (brainstorming, systematic-debugging) first, then domain and implementation skills.
+- **Stop Red Flags:** Never skip skill saying "this simple" or "explore first".
 
 ### 5.2 `using-agent-skills`
-Follow the standard engineering lifecycle sequence:
-1. **Define:** `spec-driven-development` / `idea-refine` before writing code.
-2. **Plan:** `planning-and-task-breakdown` to create verifiable, small tasks.
+Follow engineering sequence:
+1. **Define:** `spec-driven-development` / `idea-refine` before code.
+2. **Plan:** `planning-and-task-breakdown` for small verifiable tasks.
 3. **Build:** `incremental-implementation` with thin vertical slices.
 4. **Verify:** `test-driven-development` and `browser-testing-with-devtools`.
 5. **Review:** `code-review-and-quality` and `code-simplification`.
-- **Core Operating Behaviors:** Surface assumptions early, manage confusion actively (stop and clarify rather than guessing), push back on bad ideas, and enforce simplicity.
+- **Core Operating Behaviors:** Surface assumptions early, clarify confusion immediately, reject bad ideas, enforce simplicity.
 
 ### 5.3 `karpathy-guidelines`
-- **Think Before Coding:** Explicitly state assumptions; never silently pick between conflicting interpretations.
-- **Simplicity First:** Write the minimum code required to solve the task. No speculative flexibility, no unnecessary abstractions.
-- **Surgical Changes:** Edit only what is required. Match existing conventions. Do not perform unsolicited refactoring on adjacent systems.
-- **Goal-Driven Execution:** Establish verifiable pass/fail criteria before executing.
+- **Think Before Coding:** State assumptions explicitly; do not guess conflicting choices.
+- **Simplicity First:** Write minimal code. No speculative flexibility, no unneeded abstractions.
+- **Surgical Changes:** Edit only what needed. Match conventions. No unsolicited refactors.
+- **Goal-Driven Execution:** Set clear pass/fail criteria before executing.
 
 ### 5.4 `ui-ux-pro-max`
-- Apply UI/UX design intelligence using the local CLI script:
+- Apply UI/UX design intelligence via local CLI script:
   ```bash
   python "C:/Users/agung/.agents/skills/ui-ux-pro-max/scripts/search.py" "<query>" --domain <domain>
   ```
 - **Rule Priority Order:**
-  1. **Accessibility (Critical):** WCAG AA contrast (≥ 4.5:1), visible keyboard focus rings, alt text on all images, semantic tags, aria attributes.
-  2. **Touch & Interaction (Critical):** Minimum 44×44px interactive tap targets, ≥ 8px spacing between touch targets, clear loading/active states.
-  3. **Performance (High):** Modern image formats (AVIF/WebP), lazy loading, reserve layout space to guarantee CLS < 0.1.
-  4. **Layout & Responsive (High):** Mobile-first design (360px → 1440px+), zero horizontal scrolling.
-  5. **Typography & Color:** Base 16px body, 1.5 line height, semantic token usage, no raw hex in component markup.
-  6. **Animation:** Subtle CSS-based transitions, respect `prefers-reduced-motion`.
+  1. **Accessibility (Critical):** WCAG AA contrast (≥ 4.5:1), visible focus rings, alt text on images, semantic tags, aria attributes.
+  2. **Touch & Interaction (Critical):** Minimum 44×44px tap targets, ≥ 8px spacing between targets, clear loading/active states.
+  3. **Performance (High):** Modern formats (AVIF/WebP), lazy loading, reserve layout space for CLS < 0.1.
+  4. **Layout & Responsive (High):** Mobile-first design (360px → 1440px+), no horizontal scroll.
+  5. **Typography & Color:** Base 16px body, 1.5 line height, semantic tokens, no raw hex in markup.
+  6. **Animation:** Subtle CSS transitions, respect `prefers-reduced-motion`.
 
 ### 5.5 `cavecrew`
-- Use subagents to conserve context window tokens during multi-file operations:
-  - `cavecrew-investigator`: Fast code localization returning compressed `path:line` tables.
+- Use subagents to save context tokens in multi-file operations:
+  - `cavecrew-investigator`: Fast code localization returning `path:line` tables.
   - `cavecrew-builder`: Surgical edits limited to ≤ 2 files.
   - `cavecrew-reviewer`: Diff and bug audits returning structured findings.
 
 ### 5.6 `install-anti-slop`
-- Enforce strict Oxlint anti-slop rules vendored in `tools/oxlint/anti-slop/`.
-- Prevent AI coding slop:
+- Enforce Oxlint anti-slop rules in `tools/oxlint/anti-slop/`.
+- Prevent AI slop:
   - Ban redundant filter-map chains (`anti-slop/no-array-filter-map`).
-  - Ban quadratic spread accumulators in reduce loops (`oxc/no-accumulating-spread`, `anti-slop/no-reduce-accumulator-copy`).
+  - Ban quadratic spread accumulators in reduce (`oxc/no-accumulating-spread`, `anti-slop/no-reduce-accumulator-copy`).
   - Ban chained type assertions and unsafe dictionary types.
-  - Enforce clean, readable code structure and maintainable spacing.
+  - Enforce clean readable structure and spacing.
 
 ---
 
 ## 6. MCP Tools Integration
 
-Agents must leverage connected Model Context Protocol (MCP) servers to ensure grounded implementation:
+Agents must use MCP servers for grounded work:
 
 ### 6.1 Lexa MCP (`mcp__lexa_*`)
-- Use for static codebase analysis, dependency tracing, and verified edits:
-  - `mcp__lexa_files`: High-level inventory of indexed files.
-  - `mcp__lexa_symbol_search` & `mcp__lexa_symbol_defs`: Instant, accurate symbol lookups.
-  - `mcp__lexa_callers`: Trace call sites before modifying interfaces.
-  - `mcp__lexa_patch`: Apply hash-checked surgical file patches.
-  - `mcp__lexa_audit`: Run static architecture audits.
+- Static analysis, dependency tracing, verified edits:
+  - `mcp__lexa_files`: File inventory.
+  - `mcp__lexa_symbol_search` & `mcp__lexa_symbol_defs`: Symbol lookups.
+  - `mcp__lexa_callers`: Trace call sites before changing interfaces.
+  - `mcp__lexa_patch`: Hash-checked file patches.
+  - `mcp__lexa_audit`: Architecture audits.
 
 ### 6.2 CodeDB MCP (`mcp__codedb_*`)
-- Use for call graph resolution and semantic context:
-  - `codedb_explain`: Retrieve complete symbol definition body and all call sites in one call.
-  - `codedb_callpath`: Discover execution paths between functions (A → … → B).
-  - `codedb_context`: Retrieve surrounding task context with token budget limits.
-  - `codedb_list_dir`: Fast, gitignore-aware directory listings.
+- Call graph resolution and semantic context:
+  - `codedb_explain`: Get symbol body and all call sites in one call.
+  - `codedb_callpath`: Find call paths between functions (A → … → B).
+  - `codedb_context`: Task context with token budget limit.
+  - `codedb_list_dir`: Fast, gitignore-aware directory listing.
 
 ### 6.3 Figwright MCP (`mcp__figwright_*`)
-- When Figma designs or URLs are provided:
-  - `get_design_context`: Authoritative source of truth for measurements, colors, fonts, and hierarchy. Never guess or eyeball styles from images.
-  - `component_map`, `token_map`, `icon_map`: Ground Figma components and tokens against the local project before generating new markup.
-  - `save_screenshots` / `save_image_fills`: Extract original asset bytes directly from the canvas.
+- When Figma designs or URLs provided:
+  - `get_design_context`: Source of truth for measurements, colors, fonts, hierarchy. Never guess styles from images.
+  - `component_map`, `token_map`, `icon_map`: Ground Figma components and tokens against local project before writing markup.
+  - `save_screenshots` / `save_image_fills`: Extract assets directly from canvas.
 
 ### 6.4 Browser & Runtime DevTools
-- Use browser testing for runtime verification of responsive layout, visual contrast, touch target sizes, and Lighthouse scores.
+- Use browser testing for layout, contrast, touch sizes, Lighthouse scores.
 
 ---
 
@@ -227,17 +227,17 @@ kopdes-merah-putih/
 
 ## 8. Definition of Done & Verification Protocol
 
-Before declaring any implementation or phase complete, verify all of the following:
+Before declaring work complete, verify:
 
-1. **Rule Audit:** Run `pnpm audit:rules` (or `node scripts/audit-rules.mjs`). Must pass with 0 errors:
-   - Zero occurrences of `useEffect` or `useLayoutEffect` in `src/`.
-   - Zero references to `radix` in `package.json`, `pnpm-lock.yaml`, or `src/`.
+1. **Rule Audit:** Run `pnpm audit:rules` (or `node scripts/audit-rules.mjs`) with 0 errors:
+   - Zero `useEffect` or `useLayoutEffect` in `src/`.
+   - Zero `radix` references in `package.json`, `pnpm-lock.yaml`, `src/`.
    - Zero legacy patterns (`forwardRef`, `React.FC`, `CommonJS`, `tailwind.config.*`).
    - Zero `: any` or `@ts-ignore` in `src/`.
-2. **Typecheck & Astro Check:** Run `pnpm astro check` and `pnpm tsc --noEmit` — must exit 0 with clean output.
-3. **Lint & Anti-slop Check:** Run `pnpm lint` — must pass cleanly without suppressed rules.
-4. **Production Build:** Run `pnpm build` — static output must generate without hydration warnings or build errors.
+2. **Typecheck & Astro Check:** Run `pnpm astro check` and `pnpm tsc --noEmit` — exit 0 clean.
+3. **Lint & Anti-slop Check:** Run `pnpm lint` — pass without suppressed rules.
+4. **Production Build:** Run `pnpm build` — static output builds without hydration warnings or build errors.
 5. **Visual & Accessibility QA:**
-   - Verify mobile layout down to 360px viewport width (no horizontal overflow).
-   - Verify transparent logo on both white and red backgrounds.
-   - Verify minimum 44px tap targets for buttons, tabs, and hamburger menus.
+   - Verify mobile layout down to 360px viewport (no horizontal overflow).
+   - Verify transparent logo on white and red backgrounds.
+   - Verify 44px minimum tap targets for buttons, tabs, hamburger menus.
