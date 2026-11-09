@@ -9,6 +9,8 @@ const exact = [
   ['home-firstfold-1440x900.png', 1440, 900],
   ['home-firstfold-1280x720.png', 1280, 720],
   ['home-firstfold-390x844.png', 390, 844],
+  ['home-firstfold-360x780.png', 360, 780],
+  ['home-firstfold-768x1024.png', 768, 1024],
   ['home-firstfold-320x700.png', 320, 700],
   ['home-firstfold-1920x1080.png', 1920, 1080],
 ];
