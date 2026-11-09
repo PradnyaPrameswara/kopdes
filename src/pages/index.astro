@@ -76,7 +76,7 @@ const units = [
               <small>Lihat galeri <span aria-hidden="true">›</span></small>
             </span>
           </a>
-          <figcaption>Foto: {featuredDocumentary.caption} · <a href={featuredDocumentary.source} target="_blank" rel="noopener noreferrer">{featuredDocumentary.credit}</a></figcaption>
+          <figcaption>Foto: {featuredDocumentary.caption} · <a href={featuredDocumentary.source} target="_blank" rel="noopener noreferrer">{featuredDocumentary.credit}</a> · <a href={featuredDocumentary.licenseUrl} target="_blank" rel="noopener noreferrer">{featuredDocumentary.license}</a></figcaption>
         </figure>
 
         <div class="retro-reference-actions">
@@ -117,7 +117,7 @@ const units = [
             loading="lazy"
             decoding="async"
           />
-          <figcaption>{storefrontHero.caption} · <a href={storefrontHero.source} target="_blank" rel="noopener noreferrer">{storefrontHero.credit}</a></figcaption>
+          <figcaption>{storefrontHero.caption} · <a href={storefrontHero.source} target="_blank" rel="noopener noreferrer">{storefrontHero.credit}</a> · <a href={storefrontHero.licenseUrl} target="_blank" rel="noopener noreferrer">{storefrontHero.license}</a></figcaption>
         </figure>
       </div>
     </section>
@@ -185,7 +185,8 @@ const units = [
               <figcaption>
                 <strong>{photo.title}</strong>
                 <span>{photo.caption}</span>
-                <a href={photo.source} target="_blank" rel="noopener noreferrer">Sumber: {photo.credit}</a>
+                <a href={photo.source} target="_blank" rel="noopener noreferrer">Foto: {photo.credit}</a>
+                <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">Lisensi {photo.license}</a>
               </figcaption>
             </figure>
           ))}
