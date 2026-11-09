@@ -1160,3 +1160,27 @@
   .retro-home .retro-promise footer { font-size: 0.58rem; }
   .retro-brand-headline { font-size: 1.93rem; }
 }
+
+/* Archived reference desktop landmarks, approximate at 1000px viewport:
+   banner+stripe 200px, navigation ~27px, media begins ~396px. */
+@media (min-width: 901px) {
+  .retro-masthead { height: clamp(200px, 20vw, 290px); min-height: 0; }
+  .retro-masthead-inner { height: 100%; padding: 0; }
+  .retro-brand-mark { flex-direction: row; align-items: center; gap: clamp(12px, 1.7vw, 22px); text-align: left; }
+  .retro-brand-circle { width: clamp(110px, 12vw, 145px); height: clamp(110px, 12vw, 145px); flex-shrink: 0; }
+  .retro-brand-name { align-items: flex-start; }
+  .retro-brand-topline { font-size: clamp(0.64rem, 0.9vw, 0.87rem); letter-spacing: 0.04em; }
+  .retro-brand-headline { font-size: clamp(2.3rem, 3.15vw, 3.3rem); }
+  .retro-brand-tagline { margin-top: 8px; padding: 5px 12px 4px; font-size: clamp(0.62rem, 0.81vw, 0.76rem); }
+  .retro-nav-desktop { min-height: 27px; }
+  .retro-nav-desktop a { padding: 6px 9px; font-size: 0.74rem; line-height: 1.1; }
+  .retro-home .retro-welcome { padding-top: 17px; }
+  .retro-reference-intro { min-height: clamp(145px, 14.5vw, 210px); }
+  .retro-home .retro-president-photo { width: 100%; max-width: 100%; height: clamp(145px, 14.5vw, 210px); object-position: center bottom; }
+  .retro-home .retro-welcome-text { height: clamp(145px, 14.5vw, 210px); justify-content: flex-start; padding: 0; }
+  .retro-home .retro-welcome-heading { font-size: clamp(1.55rem, 2.5vw, 2.3rem); line-height: 1; margin: 0 0 5px; }
+  .retro-home .retro-promise { padding: 12px 14px 11px; }
+  .retro-home .retro-promise p { font-size: clamp(0.82rem, 1.2vw, 1.05rem); }
+  .retro-home .retro-promise footer { margin-top: 5px; font-size: 0.64rem; }
+  .retro-reference-zigzag { height: 14px; margin: -12px 0 2px 33%; }
+}
