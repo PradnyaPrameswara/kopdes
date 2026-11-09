@@ -21,6 +21,7 @@ for (const [, target, source] of matches) {
     });
 
     if (response.ok) break;
+
     if (response.status !== 429 && response.status !== 503) {
       throw new Error('Unable to import image: ' + response.status + ' ' + source);
     }
