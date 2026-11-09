@@ -12,13 +12,26 @@ if (matches.length !== 5) {
 await mkdir('public/images/documentary', { recursive: true });
 
 for (const [, target, source] of matches) {
-  const response = await fetch(source, {
-    headers: { 'User-Agent': 'KopdesDocumentaryImporter/1.0 (attribution in source repo)' },
-    signal: AbortSignal.timeout(45000),
-  });
+  let response;
 
-  if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) {
-    throw new Error('Unable to import image: ' + response.status + ' ' + source);
+  for (let attempt = 0; attempt < 6; attempt++) {
+    response = await fetch(source, {
+      headers: { 'User-Agent': 'KopdesDocumentaryImporter/1.0 (attribution in source repo)' },
+      signal: AbortSignal.timeout(45000),
+    });
+
+    if (response.ok) break;
+    if (response.status !== 429 && response.status !== 503) {
+      throw new Error('Unable to import image: ' + response.status + ' ' + source);
+    }
+
+    if (attempt === 5) throw new Error('Commons rate limit persisted: ' + source);
+
+    await new Promise((resolve) => setTimeout(resolve, 2500 * (attempt + 1)));
+  }
+
+  if (!response?.ok || !response.headers.get('content-type')?.startsWith('image/')) {
+    throw new Error('Invalid source image response: ' + source);
   }
 
   const bytes = Buffer.from(await response.arrayBuffer());
@@ -42,4 +55,5 @@ for (const [, target, source] of matches) {
   ]);
 
   console.log('Imported licensed documentary photo: ' + target);
+  await new Promise((resolve) => setTimeout(resolve, 1200));
 }
