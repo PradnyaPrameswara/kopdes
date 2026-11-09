@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '@/assets/brand/logo-kopdes.webp';
-import { storefrontHero } from '@/data/visual-media';
+import { documentarySrcSet, storefrontHero } from '@/data/visual-media';
 
 // The reference has four large horizontal navigation items. Keep the utility routes in the footer.
 const navigation = [
@@ -20,6 +20,9 @@ const currentPath = Astro.url.pathname;
     <img
       class="retro-masthead-photo"
       src={storefrontHero.image}
+      srcset={documentarySrcSet(storefrontHero.image)}
+      sizes="100vw"
+      loading="eager"
       style={`object-position: ${storefrontHero.objectPosition ?? 'center'}`}
       alt={storefrontHero.alt}
       width="720"
@@ -40,7 +43,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
     </div>
-    <a class="retro-hero-photo-credit" href={storefrontHero.source} target="_blank" rel="noopener noreferrer">Foto: {storefrontHero.credit} ({storefrontHero.license})</a>
+    <a class="retro-hero-photo-credit" href={storefrontHero.source} target="_blank" rel="noopener noreferrer">Foto: {storefrontHero.credit} · {storefrontHero.license}</a>
   </div>
   <nav class="retro-nav" aria-label="Navigasi utama">
     <div class="retro-nav-desktop">

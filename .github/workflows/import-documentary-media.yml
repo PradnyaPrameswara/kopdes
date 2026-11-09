@@ -1,0 +1,43 @@
+name: Import licensed documentary assets
+
+on:
+  pull_request:
+    paths:
+      - 'src/data/visual-media.ts'
+      - 'scripts/import-documentary-media.mjs'
+      - '.github/workflows/import-documentary-media.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          persist-credentials: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Download and optimize licensed sources
+        run: node scripts/import-documentary-media.mjs
+      - name: Commit only generated documentary images
+        env:
+          PR_BRANCH: ${{ github.head_ref }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/documentary/
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: vendor licensed documentary image renditions'
+            git push origin "HEAD:$PR_BRANCH"
+          fi
