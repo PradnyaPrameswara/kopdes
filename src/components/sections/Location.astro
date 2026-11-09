@@ -1,205 +1,29 @@
 ---
-// src/components/sections/Location.astro
-import { siteConfig } from '@/data/site.config';
 ---
-
-<section id="lokasi" class="py-16 md:py-24 bg-white relative border-b border-neutral-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Tactical Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-red/20 bg-surface text-brand-red text-xs font-semibold mb-3 shadow-2xs">
-        <span class="size-2 rounded-full bg-brand-red"></span>
-        <span>Pusat Pelayanan Warga Desa</span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl font-black text-[#065366] tracking-tight">
-        Lokasi & Sentra Layanan Koperasi Merah Putih
-      </h2>
-      <p class="mt-3 text-sm sm:text-base md:text-lg text-muted leading-relaxed">
-        Pusat pelayanan terpadu hadir tepat di jantung desa untuk memudahkan belanja sembako, pemeriksaan kesehatan warga, dan administrasi keanggotaan.
-      </p>
+<section id="lokasi" class="retro-section retro-section-paper" aria-labelledby="location-heading">
+  <div class="retro-page-container">
+    <p class="retro-eyebrow retro-center">Pilih sumber informasi yang tepat</p>
+    <h2 id="location-heading" class="retro-section-title retro-center">Lokasi &amp; Informasi Resmi</h2>
+    <p class="retro-section-intro">
+      Website ini merupakan konsep informasi independen, bukan kantor koperasi tertentu.
+      Karena itu kami tidak menampilkan alamat, nomor WhatsApp, jam operasional, atau pin peta yang belum terverifikasi.
+    </p>
+    <div class="retro-unit-grid">
+      <article class="retro-unit">
+        <span class="retro-unit-number">01</span>
+        <h3>Pengurus Koperasi Setempat</h3>
+        <p>Tanyakan kontak, alamat gerai, jadwal pelayanan dan ketentuan keanggotaan kepada pemerintah desa/kelurahan dan pengurus yang dapat dibuktikan identitasnya.</p>
+      </article>
+      <article class="retro-unit">
+        <span class="retro-unit-number">02</span>
+        <h3>Sumber Pemerintah</h3>
+        <p>Gunakan portal nasional untuk informasi program dan JDIH untuk peraturan pembentukan. Situs ini tidak menerima pendaftaran atau pembayaran.</p>
+        <div class="flex flex-wrap gap-3 mt-5">
+          <a href="https://simkopdes.go.id/" target="_blank" rel="noopener noreferrer" class="retro-text-link">Portal Simkopdes</a>
+          <a href="https://jdih.kop.go.id/doc/detail/doc-1168-v_peraturan" target="_blank" rel="noopener noreferrer" class="retro-text-link">Regulasi Koperasi</a>
+        </div>
+      </article>
     </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-      <!-- Info Cards (5 Cols) -->
-      <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
-        <!-- 1. Physical Headquarters Card -->
-        <div class="bg-white rounded-[20px] p-6 border border-neutral-200 hover:border-[#065366]/40 transition-colors shadow-xs">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-neutral-100">
-            <span class="text-xs font-bold uppercase tracking-wider text-muted">Kantor & Gerai</span>
-            <span class="inline-flex items-center text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-              Pusat Pelayanan
-            </span>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="size-11 rounded-md bg-surface border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-bold text-ink text-base mb-1">Gedung Pusat Operasional</h3>
-              <p class="text-sm text-ink/90 font-medium">
-                {siteConfig.address.street}
-              </p>
-              <p class="text-xs text-muted mt-0.5">
-                {siteConfig.address.village}, {siteConfig.address.district}
-              </p>
-              <p class="text-xs text-muted">
-                {siteConfig.address.regency}, {siteConfig.address.province} {siteConfig.address.postalCode}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. 24/7 Clinic Readiness Card -->
-        <div class="bg-white rounded-lg p-6 border border-neutral-200 hover:border-brand-red/40 transition-colors shadow-xs">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-neutral-100">
-            <span class="font-mono text-xs font-bold text-neutral-400">POS-02</span>
-            <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-xs bg-emerald-50 text-emerald-800 border border-emerald-600/30 uppercase tracking-wide">
-              [KESIAPSIAGAAN 24/7]
-            </span>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="size-11 rounded-md bg-surface border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <h3 class="font-bold text-ink text-base mb-1">Kesiapsiagaan Pos Pelayanan</h3>
-              <div class="text-xs space-y-1.5 mt-2">
-                <div class="flex items-center justify-between py-1 border-b border-neutral-100">
-                  <span class="text-muted font-medium">Gerai Sembako:</span>
-                  <span class="font-mono text-ink font-bold">07:00 - 21:00 WIB</span>
-                </div>
-                <div class="flex items-center justify-between py-1 border-b border-neutral-100">
-                  <span class="text-muted font-medium">Kantor Administrasi:</span>
-                  <span class="font-mono text-ink font-bold">08:00 - 16:00 WIB</span>
-                </div>
-                <div class="flex items-center justify-between py-1 text-emerald-800 font-semibold bg-emerald-50/70 px-2 rounded-xs">
-                  <span>Klinik &amp; IGD Ringan:</span>
-                  <span class="font-mono text-xs font-bold">SIAGA 24 JAM</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Command Dispatch WhatsApp Card -->
-        <div class="bg-white rounded-lg p-6 border border-neutral-200 hover:border-brand-red/40 transition-colors shadow-xs">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-neutral-100">
-            <span class="font-mono text-xs font-bold text-neutral-400">POS-03</span>
-            <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded-xs bg-brand-red/10 text-brand-red border border-brand-red/30 uppercase tracking-wide">
-              [DISPATCH KOMANDO]
-            </span>
-          </div>
-          <div class="flex items-start gap-4 mb-4">
-            <div class="size-11 rounded-md bg-surface border border-brand-red/20 text-brand-red flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-bold text-ink text-base mb-1">Pusat Komunikasi &amp; Bantuan</h3>
-              <p class="text-xs text-muted">Hotline Markas: <span class="font-mono font-bold text-ink">{siteConfig.phone}</span></p>
-              <p class="text-xs text-muted">Surat Elektronik: <span class="font-mono font-bold text-ink">{siteConfig.email}</span></p>
-            </div>
-          </div>
-          <div>
-            <a
-              href={`https://wa.me/${siteConfig.whatsappNumber}?text=Halo%20Komando%20Koperasi%20Merah%20Putih,%20saya%20memerlukan%20informasi%20layanan`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm bg-neutral-900 hover:bg-neutral-800 text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px] border border-neutral-700"
-            >
-              <span>Hubungi Pengurus via WhatsApp</span>
-              <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tactical Map Frame (7 Cols) -->
-      <div class="lg:col-span-7 flex flex-col">
-        <div class="h-full min-h-[420px] bg-neutral-900 text-white rounded-lg border-2 border-neutral-700 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-md">
-          <!-- Tactical Grid Overlay -->
-          <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 28px 28px;" aria-hidden="true"></div>
-
-          <!-- Top Information Bar -->
-          <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-800">
-            <div class="flex items-center gap-2">
-              <span class="size-2 rounded-full bg-emerald-500"></span>
-              <span class="text-xs font-bold text-white tracking-wide">
-                Sentra Pelayanan Buka Setiap Hari
-              </span>
-            </div>
-            <div class="text-xs text-neutral-400">
-              Area Layanan: Seluruh Desa & Sekitarnya
-            </div>
-          </div>
-
-          <!-- Center Landmark Target Graphic -->
-          <div class="relative z-10 my-8 text-center flex flex-col items-center justify-center">
-            <div class="relative mb-5">
-              <div class="size-20 rounded-md bg-brand-red text-white flex items-center justify-center shadow-lg border border-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-              </div>
-              <!-- Corner Crosshair Brackets -->
-              <div class="absolute -top-2 -left-2 size-3 border-t-2 border-l-2 border-gold"></div>
-              <div class="absolute -top-2 -right-2 size-3 border-t-2 border-r-2 border-gold"></div>
-              <div class="absolute -bottom-2 -left-2 size-3 border-b-2 border-l-2 border-gold"></div>
-              <div class="absolute -bottom-2 -right-2 size-3 border-b-2 border-r-2 border-gold"></div>
-            </div>
-
-            <h4 class="text-xl font-extrabold text-white tracking-tight">
-              Markas Komando Koperasi Merah Putih
-            </h4>
-            <p class="text-xs sm:text-sm text-neutral-300 max-w-md mt-2 leading-relaxed">
-              Titik poros sentral: bersebelahan dengan Kantor Kepala Desa, persis di hadapan Pasar Induk Rakyat Desa Makmur.
-            </p>
-
-            <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
-              <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded-xs bg-neutral-800 text-neutral-200 border border-neutral-700">
-                Akses Armada Logistik
-              </span>
-              <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded-xs bg-neutral-800 text-neutral-200 border border-neutral-700">
-                Cold Storage Terkoneksi
-              </span>
-              <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded-xs bg-neutral-800 text-neutral-200 border border-neutral-700">
-                Akses Ramah Warga &amp; Lansia
-              </span>
-            </div>
-          </div>
-
-          <!-- Bottom Tactical Guidance Bar -->
-          <div class="relative z-10 pt-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-xs text-neutral-400 text-center sm:text-left">
-              <span class="font-mono font-bold text-white uppercase">PANDUAN TITIK ACUAN:</span>
-              <span class="block text-neutral-300">200 meter barat Monumen Bambu Runcing Simpang Tiga Desa.</span>
-            </div>
-            <a
-              href={siteConfig.address.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-brand-red hover:bg-brand-red-dark text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
-            >
-              <span>BUKA GOOGLE MAPS</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="mt-9 text-center text-sm text-muted">Website independen. Tidak terafiliasi atau mewakili Kementerian Koperasi maupun Presiden Republik Indonesia.</p>
   </div>
 </section>

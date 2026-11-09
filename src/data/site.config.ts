@@ -44,81 +44,38 @@ export interface SiteConfig {
   };
 }
 
+// This is an independent informational concept, not an individual licensed
+// cooperative. Contact details, opening hours, performance figures and outlet
+// addresses cannot be published until an authorized operator verifies them.
 export const siteConfig: SiteConfig = {
-  name: 'Koperasi Merah Putih',
+  name: 'Koperasi Desa/Kelurahan Merah Putih',
   shortName: 'Koperasi Merah Putih',
-  legalName: 'Koperasi Konsumen Desa/Kelurahan Merah Putih',
-  tagline: 'Membangun Kemandirian Ekonomi Desa untuk Kesejahteraan Bersama',
-  description: 'Pusat ekosistem ekonomi desa terpadu: gerai sembako murah, apotek & klinik desa, cold storage hasil tani, serta pembiayaan usaha anggota koperasi.',
+  legalName: 'Koperasi Desa/Kelurahan Merah Putih (program)',
+  tagline: 'Mengenal Gotong Royong dan Ekonomi Desa',
+  description: 'Informasi pengenalan program Koperasi Desa/Kelurahan Merah Putih, contoh unit usaha, prinsip keanggotaan dan sumber regulasi pemerintah.',
   address: {
-    street: 'Jl. Raya Merah Putih No. 45',
-    village: 'Desa Makmur',
-    district: 'Kecamatan Sentosa',
-    regency: 'Kabupaten Nusantara',
-    province: 'Jawa Barat',
-    postalCode: '40123',
-    mapsUrl: 'https://maps.google.com/?q=Koperasi+Desa+Merah+Putih',
+    street: '',
+    village: '',
+    district: '',
+    regency: '',
+    province: '',
+    postalCode: '',
+    mapsUrl: '',
   },
-  phone: '+62 812-3456-7890',
-  whatsappNumber: '6281234567890',
-  email: 'halo@koperasimerahputih.id',
+  phone: '',
+  whatsappNumber: '',
+  email: '',
   operatingHours: {
-    days: 'Senin - Jumat',
-    hours: '08:00 - 17:00 WIB',
-    weekend: 'Sabtu: 08:00 - 14:00 WIB (Klinik 24 Jam)',
+    days: '',
+    hours: '',
+    weekend: '',
   },
-  socialLinks: [
-    {
-      platform: 'instagram',
-      url: 'https://instagram.com/koperasimerahputih',
-      label: 'Instagram @koperasimerahputih',
-    },
-    {
-      platform: 'facebook',
-      url: 'https://facebook.com/koperasimerahputih',
-      label: 'Facebook Koperasi Merah Putih',
-    },
-    {
-      platform: 'tiktok',
-      url: 'https://tiktok.com/@koperasimerahputih',
-      label: 'TikTok @koperasimerahputih',
-    },
-    {
-      platform: 'youtube',
-      url: 'https://youtube.com/@koperasimerahputih',
-      label: 'YouTube Koperasi Merah Putih TV',
-    },
-  ],
-  impactStats: [
-    {
-      id: 'members',
-      value: '1.200+',
-      label: 'Anggota Aktif',
-      description: 'Warga desa terdaftar sebagai pemilik sekaligus penerima manfaat koperasi.',
-    },
-    {
-      id: 'products',
-      value: '450+',
-      label: 'Komoditas Pangan',
-      description: 'Pasokan komoditas beras, minyak goreng, gula, dan sarana pertanian warga.',
-    },
-    {
-      id: 'outlets',
-      value: '5',
-      label: 'Unit Layanan Aktif',
-      description: 'Titik operasional fisik yang melayani kebutuhan warga setiap hari.',
-    },
-    {
-      id: 'savings',
-      value: 'Rp 2,4 M',
-      label: 'Dana Terdistribusi',
-      description: 'Akumulasi perputaran simpan pinjam dan bagi hasil SHU bagi anggota.',
-    },
-  ],
+  socialLinks: [],
+  impactStats: [],
   meta: {
-    siteUrl: 'https://koperasimerahputih.id',
-    author: 'Pengurus Koperasi Merah Putih',
-    themeColor: '#CE1126',
+    siteUrl: 'https://kopdesmerahputih.id',
+    author: 'KOPDES — proyek informasi independen',
+    themeColor: '#B91C1C',
     locale: 'id_ID',
   },
 };
