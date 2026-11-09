@@ -5,6 +5,7 @@ export interface DocumentaryPhoto {
   title: string;
   caption: string;
   image: string;
+  sourceImage: string;
   alt: string;
   credit: string;
   source: string;
@@ -17,7 +18,8 @@ export interface DocumentaryPhoto {
 export const storefrontHero: DocumentaryPhoto = {
   title: 'Koperasi Desa Merah Putih Bentangan',
   caption: 'Bangunan Koperasi Desa Merah Putih Bentangan, Wonosari, Klaten',
-  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Kopdes_Merah_Putih_Bentangan_Klaten.jpg/1280px-Kopdes_Merah_Putih_Bentangan_Klaten.jpg',
+  image: '/images/documentary/bentangan.webp',
+  sourceImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Kopdes_Merah_Putih_Bentangan_Klaten.jpg/1280px-Kopdes_Merah_Putih_Bentangan_Klaten.jpg',
   alt: 'Foto bangunan Koperasi Desa Merah Putih Bentangan di Klaten dengan papan nama merah putih dan deretan pintu gerai',
   credit: 'BiographyWriter45 / Wikimedia Commons',
   author: 'BiographyWriter45',
@@ -31,7 +33,8 @@ export const cooperativeGallery: DocumentaryPhoto[] = [
   {
     title: 'Koperasi Desa Watualang',
     caption: 'Bangunan Koperasi Desa Merah Putih Watualang',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Koperasi_Desa_Merah_Putih_Watualang.jpg/1280px-Koperasi_Desa_Merah_Putih_Watualang.jpg',
+    image: '/images/documentary/watualang.webp',
+    sourceImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Koperasi_Desa_Merah_Putih_Watualang.jpg/1280px-Koperasi_Desa_Merah_Putih_Watualang.jpg',
     alt: 'Fasad Koperasi Merah Putih Watualang dengan pintu merah dan identitas koperasi di dinding kanan',
     credit: 'YT Arty / Wikimedia Commons',
     author: 'YT Arty',
@@ -43,7 +46,8 @@ export const cooperativeGallery: DocumentaryPhoto[] = [
   {
     title: 'Koperasi Merah Putih Mandirancan',
     caption: 'Bangunan Koperasi Merah Putih Desa Mandirancan, Kebasen, Banyumas',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg/1280px-Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg',
+    image: '/images/documentary/mandirancan.webp',
+    sourceImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg/1280px-Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg',
     alt: 'Bangunan gerai koperasi di Mandirancan, Banyumas, dengan deretan pintu dan halaman terbuka',
     credit: 'TyoAriSetiadi / Wikimedia Commons',
     author: 'TyoAriSetiadi',
@@ -55,7 +59,8 @@ export const cooperativeGallery: DocumentaryPhoto[] = [
   {
     title: 'Koperasi Desa Tambakboyo',
     caption: 'Bangunan Koperasi Desa Merah Putih Tambakboyo, Pedan, Klaten',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg',
+    image: '/images/documentary/tambakboyo.webp',
+    sourceImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg',
     alt: 'Foto bangunan Koperasi Merah Putih Tambakboyo di Pedan dengan papan nama pada fasad',
     credit: 'Dani Safa Adi Nugraha / Wikimedia Commons',
     author: 'Dani Safa Adi Nugraha',
@@ -67,7 +72,8 @@ export const cooperativeGallery: DocumentaryPhoto[] = [
   {
     title: 'Koperasi Desa Kwarasan',
     caption: 'Bangunan Koperasi Desa Merah Putih Kwarasan, Juwiring, Klaten',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg',
+    image: '/images/documentary/kwarasan.webp',
+    sourceImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg',
     alt: 'Bangunan Koperasi Desa Merah Putih Kwarasan di tengah area pertanian dengan langit sore',
     credit: 'Dani Safa Adi Nugraha / Wikimedia Commons',
     author: 'Dani Safa Adi Nugraha',
@@ -79,3 +85,8 @@ export const cooperativeGallery: DocumentaryPhoto[] = [
 ];
 
 export const featuredDocumentary: DocumentaryPhoto = cooperativeGallery[0];
+
+/** Browsers download a smaller self-hosted rendition on narrow screens. */
+export function documentarySrcSet(image: string): string {
+  return `${image.replace(/\.webp$/, '-640.webp')} 640w, ${image} 1280w`;
+}

@@ -4,7 +4,7 @@ import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { Image } from 'astro:assets';
 import prabowoPortrait from '@/assets/photos/presiden-prabowo-hormat.webp';
-import { cooperativeGallery, featuredDocumentary, storefrontHero } from '@/data/visual-media';
+import { cooperativeGallery, documentarySrcSet, featuredDocumentary, storefrontHero } from '@/data/visual-media';
 
 const featuredPhotos = cooperativeGallery;
 
@@ -58,9 +58,14 @@ const units = [
           <a href="/#galeri" aria-label="Buka galeri dokumentasi Koperasi Merah Putih">
             <img
               src={featuredDocumentary.image}
+              srcset={documentarySrcSet(featuredDocumentary.image)}
+              sizes="(min-width: 901px) 450px, 90vw"
               alt={featuredDocumentary.alt}
               data-documented-image
               data-fallback-src={storefrontHero.image}
+              data-fallback-srcset={documentarySrcSet(storefrontHero.image)}
+              data-fallback-license={storefrontHero.license}
+              data-fallback-license-url={storefrontHero.licenseUrl}
               data-fallback-alt={storefrontHero.alt}
               data-fallback-source={storefrontHero.source}
               data-fallback-credit={storefrontHero.credit}
@@ -110,6 +115,8 @@ const units = [
         <figure class="retro-story-photo">
           <img
             src={storefrontHero.image}
+            srcset={documentarySrcSet(storefrontHero.image)}
+            sizes="(min-width: 900px) 45vw, 90vw"
             alt={storefrontHero.alt}
             data-documented-image
             width="720"
@@ -169,10 +176,15 @@ const units = [
               <a href={photo.source} target="_blank" rel="noopener noreferrer" aria-label={'Lihat sumber foto ' + photo.title}>
                 <img
                   src={photo.image}
+                  srcset={documentarySrcSet(photo.image)}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 94vw"
                   alt={photo.alt}
                   style={`object-position: ${photo.objectPosition ?? 'center'}`}
                   data-documented-image
                   data-fallback-src={storefrontHero.image}
+                  data-fallback-srcset={documentarySrcSet(storefrontHero.image)}
+                  data-fallback-license={storefrontHero.license}
+                  data-fallback-license-url={storefrontHero.licenseUrl}
                   data-fallback-alt={storefrontHero.alt}
                   data-fallback-source={storefrontHero.source}
                   data-fallback-credit={storefrontHero.credit}
@@ -222,6 +234,7 @@ const units = [
         if (!source) return;
 
         image.dataset.fallbackApplied = 'true';
+        image.srcset = image.dataset.fallbackSrcset ?? '';
         image.src = source;
         image.alt = image.dataset.fallbackAlt ?? 'Foto dokumentasi gerai Koperasi Merah Putih Bentangan';
 
@@ -240,7 +253,12 @@ const units = [
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.textContent = 'Sumber: ' + credit;
-        caption.replaceChildren(name, place, link);
+        const licenseLink = document.createElement('a');
+        licenseLink.href = image.dataset.fallbackLicenseUrl ?? '';
+        licenseLink.target = '_blank';
+        licenseLink.rel = 'noopener noreferrer';
+        licenseLink.textContent = 'Lisensi ' + (image.dataset.fallbackLicense ?? 'foto');
+        caption.replaceChildren(name, place, link, licenseLink);
 
         const parentLink = image.closest('a');
 
