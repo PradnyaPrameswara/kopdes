@@ -9,7 +9,8 @@
     "astro": "astro",
     "check": "astro check",
     "lint": "oxlint",
-    "audit:rules": "node scripts/audit-rules.mjs"
+    "audit:rules": "node scripts/audit-rules.mjs",
+    "audit:site": "node scripts/audit-generated-site.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.2",
