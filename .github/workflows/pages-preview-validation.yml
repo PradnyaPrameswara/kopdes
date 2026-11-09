@@ -1,0 +1,31 @@
+name: GitHub Pages base-path validation
+
+on:
+  pull_request:
+    paths:
+      - 'astro.config.ts'
+      - 'src/**'
+      - 'scripts/prepare-pages-preview.mjs'
+      - 'scripts/audit-pages-preview.mjs'
+      - '.github/workflows/pages-preview-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pages-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: KOPDES_PAGES_PREVIEW=true pnpm build
+      - run: node scripts/prepare-pages-preview.mjs
+      - run: node scripts/audit-pages-preview.mjs

@@ -5,7 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kopdesmerahputih.id',
+  site: process.env.KOPDES_PAGES_PREVIEW === 'true' ? 'https://pradnyaprameswara.github.io' : 'https://kopdesmerahputih.id',
+  base: process.env.KOPDES_PAGES_PREVIEW === 'true' ? '/kopdes/' : '/',
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
