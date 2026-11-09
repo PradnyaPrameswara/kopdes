@@ -22,8 +22,9 @@ const {
   noindex = true,
 } = Astro.props;
 
-const siteUrl = siteConfig.meta.siteUrl;
-const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+const siteUrl = import.meta.env.SITE ?? siteConfig.meta.siteUrl;
+const siteRoot = new URL(import.meta.env.BASE_URL, siteUrl);
+const fullImageUrl = image.startsWith('http') ? image : new URL(image.replace(/^\\/+/, ''), siteRoot).href;
 
 const siteSchema = {
   '@context': 'https://schema.org',
@@ -31,7 +32,7 @@ const siteSchema = {
   name: siteConfig.name,
   description: siteConfig.description,
   inLanguage: 'id-ID',
-  url: siteUrl,
+  url: siteRoot.href,
 };
 ---
 
