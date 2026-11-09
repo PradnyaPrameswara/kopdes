@@ -1174,7 +1174,9 @@
   .retro-brand-tagline { margin-top: 8px; padding: 5px 12px 4px; font-size: clamp(0.62rem, 0.81vw, 0.76rem); }
   .retro-nav-desktop { min-height: 27px; }
   .retro-nav-desktop a { padding: 6px 9px; font-size: 0.74rem; line-height: 1.1; }
-  .retro-home .retro-welcome { padding-top: 17px; }
+  .retro-home .retro-welcome { padding-top: 11px; }
+  .retro-reference-stage { width: min(calc(100% - 34px), 45vw); }
+  .retro-home .retro-welcome-heading { text-align: center; }
   .retro-reference-intro { min-height: clamp(145px, 14.5vw, 210px); }
   .retro-home .retro-president-photo { width: 100%; max-width: 100%; height: clamp(145px, 14.5vw, 210px); object-position: center bottom; }
   .retro-home .retro-welcome-text { height: clamp(145px, 14.5vw, 210px); justify-content: flex-start; padding: 0; }

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import sharp from 'sharp';
 
 const snapshotDirectory = 'screenshots';
 
@@ -65,6 +66,51 @@ for (const [file, width, height] of exact) {
 for (const [file, width, minimumHeight] of fullPage) {
   inspectScreenshot(file, width, minimumHeight, false);
 }
+
+
+async function inspectReferenceGeometry() {
+  const screenshot = path.join(snapshotDirectory, 'home-reference-1000x563.png');
+  const { data, info } = await sharp(screenshot).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+
+  function pixelAt(x, y) {
+    const index = (y * info.width + x) * info.channels;
+
+    return [data[index], data[index + 1], data[index + 2]];
+  }
+
+  function near(actual, expected, tolerance = 12) {
+    return actual.every((value, index) => Math.abs(value - expected[index]) <= tolerance);
+  }
+
+  // These sample only solid KOPDES layout bands, not reference pixels or imagery.
+  const anchors = [
+    { name: 'navigation band at y=210', x: 3, y: 210, rgb: [6, 83, 102] },
+    { name: 'welcome starts at y=229', x: 3, y: 229, rgb: [255, 240, 207] },
+    { name: 'warm welcome continues at y=400', x: 3, y: 400, rgb: [255, 240, 207] },
+  ];
+
+  for (const anchor of anchors) {
+    const actual = pixelAt(anchor.x, anchor.y);
+
+    if (!near(actual, anchor.rgb)) {
+      console.error('FAIL ' + anchor.name + ': ' + actual.join(','));
+      failed = true;
+    } else {
+      console.log('PASS ' + anchor.name);
+    }
+  }
+
+  const mediaTop = pixelAt(500, 398);
+
+  if (!near(mediaTop, [2, 63, 80], 30)) {
+    console.error('FAIL media panel top at 1000px: ' + mediaTop.join(','));
+    failed = true;
+  } else {
+    console.log('PASS documentary media panel starts near reference y=396');
+  }
+}
+
+await inspectReferenceGeometry();
 
 if (failed) {
   process.exitCode = 1;
