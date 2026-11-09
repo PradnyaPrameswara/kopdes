@@ -7,12 +7,13 @@ const lines = ['# Lighthouse mobile sample', '', 'Local production build; one si
 for (const name of categories) {
   const value = report.categories?.[name]?.score;
 
-  if (typeof value !== 'number') throw new Error('Missing Lighthouse category: ' + name);
+  if (!Number.isFinite(value)) throw new Error('Missing Lighthouse category: ' + name);
 
   lines.push('- ' + name + ': ' + Math.round(value * 100));
 }
 
 lines.push('');
+
 lines.push('## Lab metrics');
 
 for (const id of ['first-contentful-paint', 'largest-contentful-paint', 'cumulative-layout-shift', 'total-blocking-time', 'speed-index']) {
@@ -23,5 +24,7 @@ for (const id of ['first-contentful-paint', 'largest-contentful-paint', 'cumulat
 }
 
 lines.push('', 'INP cannot be established by this single lab Lighthouse run; it requires real-user field data.', '');
+
 await writeFile('reports/lighthouse-summary.md', lines.join('\n'));
+
 console.log(lines.join('\n'));

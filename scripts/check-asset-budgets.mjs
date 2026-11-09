@@ -24,6 +24,7 @@ const logoBytes = (await stat(logo)).size;
 if (logoBytes > limits.logo) failures.push(logo + ' exceeds ' + limits.logo + ' bytes');
 
 console.log('Documentary image total: ' + totalBytes + ' bytes');
+
 console.log('Brand logo: ' + logoBytes + ' bytes');
 
 if (failures.length) {
