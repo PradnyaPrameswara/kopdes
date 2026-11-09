@@ -27,6 +27,7 @@ try {
         const visible = (element) => element.getClientRects().length > 0;
         const isBroken = (image) => visible(image) && (!image.complete || image.naturalWidth === 0);
         const focusables = [...document.querySelectorAll('a, button, input, summary')].filter(visible);
+
         const clipped = focusables.filter((element) => {
           const rect = element.getBoundingClientRect();
 
@@ -39,7 +40,7 @@ try {
           hasMain: Boolean(document.querySelector('main#main-content')),
           headings: document.querySelectorAll('h1').length,
           unlabelledImages: [...document.images].filter((image) => !image.hasAttribute('alt')).length,
-          brokenImages: [...document.images].filter(isBroken).map((image) => image.currentSrc),
+          brokenImages: [...document.images].flatMap((image) => isBroken(image) ? [image.currentSrc] : []),
           clippedControls: clipped.map((element) => element.outerHTML.slice(0, 120)),
           primaryButtonsTooSmall: [...document.querySelectorAll('.retro-button')].filter(visible).filter((element) => element.getBoundingClientRect().height < 44).length,
         };
