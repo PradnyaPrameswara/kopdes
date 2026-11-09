@@ -42,4 +42,5 @@ async function visit(directory) {
 }
 
 await visit(root);
+
 console.log('Prepared Pages /kopdes/ preview links in ' + updatedFiles + ' HTML documents.');
