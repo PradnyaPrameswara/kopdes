@@ -202,6 +202,7 @@ const units = [
         if (image.dataset.fallbackApplied === 'true') return;
 
         const source = image.dataset.fallbackSrc;
+
         if (!source) return;
 
         image.dataset.fallbackApplied = 'true';
@@ -226,10 +227,12 @@ const units = [
         caption.replaceChildren(name, place, link);
 
         const parentLink = image.closest('a');
+
         if (parentLink) parentLink.href = sourceLink;
       };
 
       image.addEventListener('error', applyFallback, { once: true });
+
       if (image.complete && image.naturalWidth === 0) applyFallback();
     }
   </script>
