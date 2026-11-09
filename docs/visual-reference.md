@@ -28,3 +28,11 @@ KOPDES colors: #B91C1C red, #065366 teal, #FFF0CF warm light accent, #FFFAF0 pap
 ## Verification
 
 Run pnpm install --frozen-lockfile, pnpm lint, pnpm audit:rules, pnpm check, pnpm build, and visual/accessibility reviews at key widths. No screenshot comparison or Lighthouse score can be claimed without actually running it.
+
+## Reference alignment — PR4
+
+Navigation now carries the same four-column information hierarchy as the reference's History / Culture & Values / Jobs / Training sections: Sejarah Kami / Budaya & Nilai / Gerai & Layanan / Galeri Kegiatan. All previous site routes remain reachable via the global footer; registration also remains in the mobile navigation and in page CTAs.
+
+The welcome area uses a strong centered display heading, short left-hand statement with a white framed promise box, and an existing transparent President Prabowo photograph aligned to the right/bottom. The decorative disc not present in the known reference structure was removed. The image is labeled documentary, not as a quotation or personalized endorsement.
+
+Pixel-accurate parity **is not verified** until reference screenshots and local render screenshots can be compared at matched viewport widths.

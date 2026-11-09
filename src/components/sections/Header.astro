@@ -3,16 +3,15 @@ import { Image } from 'astro:assets';
 import logo from '@/assets/brand/logo-kopdes.webp';
 import { storefrontHero } from '@/data/visual-media';
 
+// The reference has four large horizontal navigation items. Keep the utility routes in the footer.
 const navigation = [
-  { label: 'Beranda', href: '/' },
-  { label: 'Sejarah', href: '/#sejarah' },
-  { label: 'Nilai Kami', href: '/#nilai' },
-  { label: 'Gerai', href: '/#gerai' },
-  { label: 'Keanggotaan', href: '/keanggotaan' },
-  { label: 'Lokasi', href: '/lokasi' },
-  { label: 'Tanya Jawab', href: '/faq' },
-  { label: 'Daftar', href: '/daftar' },
+  { label: 'Sejarah Kami', href: '/tentang' },
+  { label: 'Budaya & Nilai', href: '/tujuan' },
+  { label: 'Gerai & Layanan', href: '/gerai' },
+  { label: 'Galeri Kegiatan', href: '/#galeri' },
 ];
+
+const membershipLink = { label: 'Daftar Anggota', href: '/daftar' };
 
 const currentPath = Astro.url.pathname;
 ---
@@ -54,6 +53,7 @@ const currentPath = Astro.url.pathname;
         {navigation.map((link) => (
           <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a>
         ))}
+        <a href={membershipLink.href}>{membershipLink.label}</a>
       </div>
     </details>
   </nav>
