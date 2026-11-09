@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/geist';
 import '../styles/global.css';
+import '../styles/retro.css';
 import { siteConfig } from '@/data/site.config';
 
 export interface Props {
@@ -104,7 +105,7 @@ const organizationSchema = {
     <!-- JSON-LD Structured Data Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   </head>
-  <body class="min-h-screen bg-background text-foreground antialiased selection:bg-brand-red selection:text-white">
+  <body class="retro-site min-h-screen bg-background text-foreground antialiased selection:bg-brand-red selection:text-white">
     <!-- Accessible Skip Link to Main Content -->
     <a
       href="#main-content"
