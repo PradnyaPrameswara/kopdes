@@ -63,11 +63,15 @@ jobs:
           pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="390,7700" --wait-for-timeout=1800 --full-page http://127.0.0.1:4321/daftar/ screenshots/registration-mobile-390.png
       - name: Validate screenshot dimensions and PNG integrity
         run: node scripts/check-visual-snapshots.mjs
+      - name: Measure archived-reference structural landmarks
+        run: node scripts/report-visual-geometry.mjs
       - name: Upload visual evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: kopdes-responsive-snapshots
-          path: screenshots/*.png
+          path: |
+            screenshots/*.png
+            screenshots/reference-geometry.json
           retention-days: 7
           if-no-files-found: warn
