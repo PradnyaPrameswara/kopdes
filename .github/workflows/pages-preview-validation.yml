@@ -8,6 +8,7 @@ on:
       - 'scripts/prepare-pages-preview.mjs'
       - 'scripts/audit-pages-preview.mjs'
       - '.github/workflows/pages-preview-validation.yml'
+      - '.github/workflows/github-pages-preview.yml'
 
 permissions:
   contents: read
