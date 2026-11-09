@@ -1,0 +1,5 @@
+# Desktop composition gate — PR #19
+
+Ground truth is the archived 1 September 2026 desktop image described in `docs/reference-geometry.md`, **not** the current live DOM. The 1000×563 KOPDES Chromium screenshot after the licensed-asset import was inspected. Observed geometry: decorative stripe y=0–15, photographic masthead y=16–199, four-tab navigation y=200–226, warm welcome from y=227, centered media x=275–724 and its top border y=395. The 450px stage matches the approximate reference width and media top (about y=396); content imagery, exact copy and typeface intentionally differ.
+
+This PR makes desktop heading wrapping resilient, tests the media's left/right boundaries (not just its central pixel) and captures an additional 1280×720 first-fold image. These anchors test **KOPDES baseline geometry only**, not a manufactured reference parity percentage. The reference below-the-fold and mobile behavior remain unavailable. A future CSS change shifting the media border should be assessed against this evidence before updating regression expectations.
