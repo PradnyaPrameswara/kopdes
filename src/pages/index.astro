@@ -4,7 +4,7 @@ import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { Image } from 'astro:assets';
 import prabowoPortrait from '@/assets/photos/presiden-prabowo-hormat.webp';
-import { cooperativeGallery, storefrontHero } from '@/data/visual-media';
+import { cooperativeGallery, featuredDocumentary, storefrontHero } from '@/data/visual-media';
 
 const featuredPhotos = cooperativeGallery;
 
@@ -29,44 +29,62 @@ const units = [
 
   <div class="retro-home">
     <section class="retro-welcome" aria-labelledby="welcome-heading">
-      <div class="retro-page-container">
-        <h1 id="welcome-heading" class="retro-welcome-heading">Selamat Datang!</h1>
-        <div class="retro-welcome-grid">
-          <div class="retro-welcome-text">
-            <p class="retro-lead">
-              Kebutuhan warga. Hasil usaha desa. Semangat gotong royong.
-              Semua tumbuh bersama melalui Koperasi Merah Putih.
-            </p>
-            <p class="retro-welcome-detail">
-              Tempat bagi masyarakat untuk mengenal gerai kebutuhan pokok,
-              layanan koperasi, dan peluang ekonomi yang dibangun dari desa.
-              Selamat datang di gerakan ekonomi rakyat.
-            </p>
-            <div class="retro-promise">
-              <span class="retro-promise-star" aria-hidden="true">★</span>
-              <p>Bersama Koperasi Merah Putih, desa bergerak maju.</p>
-            </div>
-            <p class="retro-welcome-sign">Bersama membangun ekonomi desa</p>
-            <div class="retro-actions">
-              <a href="/tentang" class="retro-button retro-button-red">Kenali Koperasi</a>
-              <a href="/keanggotaan" class="retro-button retro-button-outline">Cara Bergabung</a>
-            </div>
-          </div>
-
+      <div class="retro-reference-stage">
+        <div class="retro-reference-intro">
           <figure class="retro-president-figure">
             <Image
               src={prabowoPortrait}
-              alt="Foto dokumentasi Presiden Prabowo Subianto"
+              alt="Foto dokumentasi Presiden Prabowo Subianto, bukan dukungan terhadap website ini"
               width={600}
               class="retro-president-photo"
               loading="eager"
             />
-            <figcaption class="retro-portrait-caption">
-              <strong>Prabowo Subianto</strong>
-              <span>Presiden Republik Indonesia</span>
-              <small>Foto dokumentasi · Bukan kutipan atau dukungan personal terhadap situs ini</small>
-            </figcaption>
+            <figcaption class="sr-only">Prabowo Subianto, Presiden Republik Indonesia. Foto dokumentasi, bukan kutipan atau dukungan terhadap situs konsep ini.</figcaption>
           </figure>
+
+          <div class="retro-welcome-text">
+            <h1 id="welcome-heading" class="retro-welcome-heading">Selamat Datang!</h1>
+            <blockquote class="retro-promise">
+              <span class="retro-promise-star" aria-hidden="true">“</span>
+              <p>Gotong royong memperkuat ekonomi desa. Bersama, kita membuka peluang usaha dan layanan bagi masyarakat.</p>
+              <footer>Pesan Koperasi Merah Putih — bukan pernyataan Presiden</footer>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="retro-reference-zigzag" aria-hidden="true"></div>
+
+        <figure class="retro-feature-media">
+          <a href="/#galeri" aria-label="Buka galeri dokumentasi Koperasi Merah Putih">
+            <img
+              src={featuredDocumentary.image}
+              alt={featuredDocumentary.alt}
+              data-documented-image
+              data-fallback-src={storefrontHero.image}
+              data-fallback-alt={storefrontHero.alt}
+              data-fallback-source={storefrontHero.source}
+              data-fallback-credit={storefrontHero.credit}
+              style={`object-position: ${featuredDocumentary.objectPosition ?? 'center'}`}
+              width="720"
+              height="480"
+              loading="eager"
+              decoding="async"
+            />
+            <span class="retro-feature-overlay">
+              <strong>Koperasi Merah Putih</strong>
+              <span>Dokumentasi Gerai &amp; Kegiatan</span>
+              <small>Lihat galeri <span aria-hidden="true">›</span></small>
+            </span>
+          </a>
+          <figcaption>Foto: {featuredDocumentary.caption} · <a href={featuredDocumentary.source} target="_blank" rel="noopener noreferrer">{featuredDocumentary.credit}</a></figcaption>
+        </figure>
+
+        <div class="retro-reference-actions">
+          <p>Kenali program, nilai gotong royong, dan unit usaha koperasi di berbagai desa.</p>
+          <div class="retro-actions">
+            <a href="/tentang" class="retro-button retro-button-red">Sejarah Kami</a>
+            <a href="/keanggotaan" class="retro-button retro-button-outline">Keanggotaan</a>
+          </div>
         </div>
       </div>
     </section>
