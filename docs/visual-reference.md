@@ -36,3 +36,11 @@ Navigation now carries the same four-column information hierarchy as the referen
 The welcome area uses a strong centered display heading, short left-hand statement with a white framed promise box, and an existing transparent President Prabowo photograph aligned to the right/bottom. The decorative disc not present in the known reference structure was removed. The image is labeled documentary, not as a quotation or personalized endorsement.
 
 Pixel-accurate parity **is not verified** until reference screenshots and local render screenshots can be compared at matched viewport widths.
+
+## Inner-page continuity — PR5
+
+All six informational routes now share a reusable full-width, cream-colored introductory banner and vintage headline typography, following the same hierarchy as the redesigned homepage. The existing Astro section components and route paths are retained.
+
+The registration route formerly collected a 16-digit NIK and transmitted it via a hardcoded WhatsApp number. Because all contact information is demonstration data, that unsafe form was replaced by a guided information-only page; no identity details are collected by the prototype.
+
+The page layout now uses a real local logo file for its Open Graph fallback rather than the missing OG image path. JSON-LD marks the project as a website rather than falsely asserting a verified business location or hours. Real-world operational claims in older sections must still be validated before publishing.

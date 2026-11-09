@@ -16,7 +16,7 @@ export interface Props {
 const {
   title = `${siteConfig.name} - ${siteConfig.tagline}`,
   description = siteConfig.description,
-  image = '/images/og-image.jpg',
+  image = '/images/brand/logo-kopdes.webp',
   canonicalURL = Astro.url.href,
   type = 'website',
   noindex = false,
@@ -25,47 +25,13 @@ const {
 const siteUrl = siteConfig.meta.siteUrl;
 const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
 
-const organizationSchema = {
+const siteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'CooperativeStore',
-  '@id': `${siteUrl}/#organization`,
+  '@type': 'WebSite',
   name: siteConfig.name,
-  alternateName: [siteConfig.shortName, siteConfig.legalName],
   description: siteConfig.description,
+  inLanguage: 'id-ID',
   url: siteUrl,
-  logo: `${siteUrl}/images/brand/logo-kopdes.webp`,
-  image: fullImageUrl,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: siteConfig.address.street,
-    addressLocality: siteConfig.address.village,
-    addressRegion: siteConfig.address.province,
-    postalCode: siteConfig.address.postalCode,
-    addressCountry: 'ID',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: -6.9175,
-    longitude: 107.6191,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Saturday'],
-      opens: '08:00',
-      closes: '14:00',
-    },
-  ],
-  priceRange: 'Rp',
-  sameAs: siteConfig.socialLinks.map((s) => s.url),
 };
 ---
 
@@ -82,7 +48,7 @@ const organizationSchema = {
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content={siteConfig.meta.author} />
+    <meta name="author" content="KOPDES independent concept" />
     <meta name="theme-color" content={siteConfig.meta.themeColor} />
     {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow" />}
 
@@ -103,7 +69,7 @@ const organizationSchema = {
     <meta property="twitter:image" content={fullImageUrl} />
 
     <!-- JSON-LD Structured Data Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
   </head>
   <body class="retro-site min-h-screen bg-background text-foreground antialiased selection:bg-brand-red selection:text-white">
     <!-- Accessible Skip Link to Main Content -->
