@@ -820,3 +820,243 @@
   .retro-registration-steps li { gap: 14px; padding: 20px 16px; }
   .retro-registration-number { font-size: 1.65rem; }
 }
+
+
+/* Reference audit PR10: close the desktop structure gap to the archived 2026 LPH screenshot.
+   Portrait LEFT, compact heading/quote RIGHT, documentary media immediately BELOW.
+   This is intentionally not a reproduction of copyrighted LPH artwork or copy. */
+.retro-masthead {
+  min-height: clamp(200px, 20vw, 290px);
+}
+.retro-masthead::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 16px;
+  z-index: 2;
+  background: repeating-conic-gradient(from 45deg, var(--retro-red) 0 25%, var(--retro-teal-dark) 0 50%) 0 0 / 20px 20px;
+}
+.retro-masthead-inner {
+  padding: 25px 0 25px;
+}
+.retro-brand-mark { gap: 5px; }
+.retro-brand-circle {
+  width: 120px;
+  height: 104px;
+  border-width: 4px;
+}
+.retro-brand-circle img { width: 110px; max-height: 92px; }
+.retro-brand-headline { font-size: clamp(2.15rem, 4.6vw, 4.2rem); }
+.retro-nav { border-top: 0; border-bottom: 0; box-shadow: none; }
+.retro-nav-desktop {
+  min-height: 37px;
+  max-width: 720px;
+}
+.retro-nav-desktop a {
+  position: relative;
+  padding: 8px 10px;
+  font-family: 'Geist Variable', sans-serif;
+  font-size: clamp(0.72rem, 1.05vw, 0.85rem);
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  border: 0;
+}
+.retro-nav-desktop a:last-child { border-right: 0; }
+.retro-nav-desktop a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  background: var(--retro-red);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.retro-home .retro-welcome {
+  background: var(--retro-cream);
+  padding: 20px 0 46px;
+}
+.retro-home .retro-welcome::before { display: none; }
+.retro-reference-stage {
+  width: min(calc(100% - 34px), 46vw);
+  margin: 0 auto;
+}
+.retro-reference-intro {
+  display: grid;
+  grid-template-columns: 31% 69%;
+  align-items: end;
+  min-height: clamp(170px, 18vw, 260px);
+}
+.retro-home .retro-president-figure {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  align-self: end;
+  z-index: 1;
+}
+.retro-home .retro-president-figure::before { display: none; }
+.retro-home .retro-president-photo {
+  display: block;
+  margin: 0;
+  width: 130%;
+  max-width: none;
+  height: clamp(175px, 18vw, 260px);
+  object-fit: contain;
+  object-position: center bottom;
+}
+.retro-home .retro-welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: none;
+  padding: 0 0 30px;
+  text-align: left;
+  z-index: 2;
+}
+.retro-home .retro-welcome-heading {
+  margin: 0 0 12px;
+  font-size: clamp(1.5rem, 2.65vw, 2.7rem);
+  line-height: 1.02;
+  white-space: normal;
+  text-shadow: none;
+  color: var(--retro-red);
+}
+.retro-home .retro-promise {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 17px 20px 13px;
+  max-width: none;
+  background: #fff;
+  border: none;
+  box-shadow: 3px 4px 0 rgba(6, 83, 102, 0.18);
+}
+.retro-home .retro-promise-star {
+  position: absolute;
+  top: -23px;
+  left: -10px;
+  font-family: var(--retro-display);
+  color: var(--retro-teal);
+  font-size: 3.4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+.retro-home .retro-promise p {
+  font-family: 'Geist Variable', sans-serif;
+  color: var(--retro-teal-dark);
+  font-size: clamp(0.88rem, 1.2vw, 1.1rem);
+  font-weight: 850;
+  line-height: 1.36;
+  margin: 0;
+}
+.retro-home .retro-promise footer {
+  margin-top: 9px;
+  font-size: clamp(0.62rem, 0.85vw, 0.78rem);
+  color: var(--retro-red-deep);
+  font-weight: 850;
+  text-align: right;
+  line-height: 1.35;
+}
+.retro-reference-zigzag {
+  height: 15px;
+  margin: -8px 0 12px 33%;
+  background: linear-gradient(135deg, transparent 45%, var(--retro-red) 46% 53%, transparent 54%) 0 0 / 23px 15px repeat-x,
+              linear-gradient(45deg, transparent 45%, var(--retro-red) 46% 53%, transparent 54%) 0 0 / 23px 15px repeat-x;
+}
+.retro-feature-media {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  background: var(--retro-teal-dark);
+  border: 6px solid var(--retro-teal-dark);
+  color: #fff;
+}
+.retro-feature-media > a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 8.5;
+  color: #fff;
+}
+.retro-feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+.retro-feature-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+  padding: clamp(13px, 2vw, 27px);
+  background: linear-gradient(transparent, rgba(0, 28, 35, 0.87));
+}
+.retro-feature-overlay strong {
+  font: 900 clamp(1.18rem, 2.1vw, 1.7rem)/1.1 var(--retro-display);
+}
+.retro-feature-overlay span {
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+.retro-feature-overlay small {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 5px 8px;
+  border: 2px solid #fff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 850;
+}
+.retro-feature-media figcaption {
+  display: block;
+  padding: 8px 10px 4px;
+  color: #fff;
+  background: var(--retro-teal-dark);
+  line-height: 1.5;
+  font-size: 0.7rem;
+}
+.retro-feature-media figcaption a { color: #fff; text-decoration: underline; }
+.retro-reference-actions {
+  max-width: 600px;
+  padding: 24px 0 0;
+  margin: 0 auto;
+  text-align: center;
+}
+.retro-reference-actions p { line-height: 1.5; font-weight: 600; margin-bottom: 13px; font-size: 0.9rem; }
+
+/* Archived reference desktop landmarks, approximate at 1000px viewport:
+   banner+stripe 200px, navigation ~27px, media begins ~396px. */
+@media (min-width: 901px) {
+  .retro-masthead { height: clamp(200px, 20vw, 290px); min-height: 0; }
+  .retro-masthead-inner { height: 100%; padding: 0; }
+  .retro-brand-mark { flex-direction: row; align-items: center; gap: clamp(12px, 1.7vw, 22px); text-align: left; }
+  .retro-brand-circle { width: clamp(110px, 12vw, 145px); height: clamp(110px, 12vw, 145px); flex-shrink: 0; }
+  .retro-brand-name { align-items: flex-start; }
+  .retro-brand-topline { font-size: clamp(0.64rem, 0.9vw, 0.87rem); letter-spacing: 0.04em; }
+  .retro-brand-headline { font-size: clamp(2.3rem, 3.15vw, 3.3rem); }
+  .retro-brand-tagline { margin-top: 8px; padding: 5px 12px 4px; font-size: clamp(0.62rem, 0.81vw, 0.76rem); }
+  .retro-nav-desktop { min-height: 27px; }
+  .retro-nav-desktop a { padding: 6px 9px; font-size: 0.74rem; line-height: 1.1; }
+  .retro-home .retro-welcome { padding-top: 17px; }
+  .retro-reference-intro { min-height: clamp(145px, 14.5vw, 210px); }
+  .retro-home .retro-president-photo { width: 100%; max-width: 100%; height: clamp(145px, 14.5vw, 210px); object-position: center bottom; }
+  .retro-home .retro-welcome-text { height: clamp(145px, 14.5vw, 210px); justify-content: flex-start; padding: 0; }
+  .retro-home .retro-welcome-heading { font-size: clamp(1.55rem, 2.5vw, 2.3rem); line-height: 1; margin: 0 0 5px; }
+  .retro-home .retro-promise { padding: 12px 14px 11px; }
+  .retro-home .retro-promise p { font-size: clamp(0.82rem, 1.2vw, 1.05rem); }
+  .retro-home .retro-promise footer { margin-top: 5px; font-size: 0.64rem; }
+  .retro-reference-zigzag { height: 14px; margin: -12px 0 2px 33%; }
+}
