@@ -23,12 +23,19 @@ for (const route of pages) {
   const label = route || 'home';
 
   if (!/<html[^>]+lang="id"/.test(html)) fail(label + ': expected Indonesian document language');
+
   if (!/<title>[^<]+<\/title>/.test(html)) fail(label + ': missing title');
+
   if (!/<meta\s+name="description"\s+content="[^"]+"/.test(html)) fail(label + ': missing description');
+
   if (!/<link\s+rel="canonical"\s+href="https:\/\//.test(html)) fail(label + ': missing canonical URL');
+
   if (!/property="og:image"\s+content="https:\/\//.test(html)) fail(label + ': missing absolute social image');
+
   if (!/<main\b[^>]*id="main-content"/.test(html)) fail(label + ': missing primary landmark');
+
   if (!/Bukan situs resmi pemerintah/.test(html)) fail(label + ': independent-site disclaimer missing');
+
   if (/<input\b[^>]*(?:name|id)="(?:nik|ktp)"/i.test(html)) fail(label + ': identity collection form present');
 
   console.log('CHECK route /' + route);
@@ -43,6 +50,7 @@ for (const name of ['bentangan', 'watualang', 'mandirancan', 'tambakboyo', 'kwar
 }
 
 for (const name of ['favicon.svg', 'favicon.webp', 'images/brand/logo-kopdes.webp']) {
+
   if (!existsSync(join(dist, name))) fail('Missing brand/social asset: ' + name);
 }
 
