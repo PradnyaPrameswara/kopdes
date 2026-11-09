@@ -31,3 +31,7 @@ Every externally hosted image was visually retrieved on November 9, 2026. Locati
 | Gallery: activity | Melawai, Jakarta | Katadata | https://katadata.co.id/foto/68f1f1c18dd5e/foto-koperasi-merah-putih-melawai-hadirkan-sembako-dengan-harga-terjangkau |
 
 The gallery is populated from `src/data/visual-media.ts`; it never presents these photos as proof of operations at the placeholder "Desa Makmur" address. Portrait of President Prabowo is a separately documented, existing local repo asset. Real image source availability is distinct from an appropriate reuse license.
+
+## Cropping and source relationship
+
+The source metadata in `src/data/visual-media.ts` now has optional `objectPosition`, allowing each real gerai photograph to retain its important signage/subject when clipped to the reference composition. `featuredDocumentary` is the documented Bentangan interior photo, intended for the compact central media surface; the masthead and history photo are associated with the correctly attributed Bentangan facade. Avoid replacing photographs with uncited generative or stock renderings. Publisher-hosted images still lack confirmed permission for production distribution.

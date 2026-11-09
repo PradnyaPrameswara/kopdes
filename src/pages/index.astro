@@ -91,19 +91,15 @@ const units = [
         </div>
         <figure class="retro-story-photo">
           <img
-            src={featuredPhotos[0].image}
-            alt={featuredPhotos[0].alt}
+            src={storefrontHero.image}
+            alt={storefrontHero.alt}
             data-documented-image
-            data-fallback-src={storefrontHero.image}
-            data-fallback-alt={storefrontHero.alt}
-            data-fallback-source={storefrontHero.source}
-            data-fallback-credit={storefrontHero.credit}
             width="720"
             height="480"
             loading="lazy"
             decoding="async"
           />
-          <figcaption>Gerai Koperasi Merah Putih Bentangan · <a href={featuredPhotos[0].source} target="_blank" rel="noopener noreferrer">{featuredPhotos[0].credit}</a></figcaption>
+          <figcaption>{storefrontHero.caption} · <a href={storefrontHero.source} target="_blank" rel="noopener noreferrer">{storefrontHero.credit}</a></figcaption>
         </figure>
       </div>
     </section>
@@ -156,6 +152,7 @@ const units = [
                 <img
                   src={photo.image}
                   alt={photo.alt}
+                  style={`object-position: ${photo.objectPosition ?? 'center'}`}
                   data-documented-image
                   data-fallback-src={storefrontHero.image}
                   data-fallback-alt={storefrontHero.alt}

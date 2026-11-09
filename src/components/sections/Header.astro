@@ -20,6 +20,7 @@ const currentPath = Astro.url.pathname;
     <img
       class="retro-masthead-photo"
       src={storefrontHero.image}
+      style={`object-position: ${storefrontHero.objectPosition ?? 'center'}`}
       alt={storefrontHero.alt}
       width="720"
       height="480"
