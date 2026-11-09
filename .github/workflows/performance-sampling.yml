@@ -43,7 +43,8 @@ jobs:
       - name: Capture mobile Lighthouse evidence
         run: |
           mkdir -p reports
-          CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -path '*/chrome-linux64/chrome' -type f | head -n 1)"
+          CHROME_PATH="$(command -v google-chrome || true)"
+          if [ -z "$CHROME_PATH" ]; then CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome -print -quit)"; fi
           test -x "$CHROME_PATH"
           export CHROME_PATH
           pnpm dlx lighthouse@12.8.2 http://127.0.0.1:4321/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=reports/lighthouse-home-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
