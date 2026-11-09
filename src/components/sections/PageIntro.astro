@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<section class="retro-interior-banner" aria-labelledby="retro-interior-heading">
+  <div class="retro-page-container retro-interior-content">
+    <nav class="retro-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Beranda</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
+    </nav>
+    <p class="retro-eyebrow">Koperasi Desa / Kelurahan Merah Putih</p>
+    <h1 id="retro-interior-heading" class="retro-section-title">{title}</h1>
+    <div class="retro-interior-rule" aria-hidden="true"></div>
+    <p class="retro-interior-subtitle">{description}</p>
+  </div>
+</section>

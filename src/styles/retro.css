@@ -794,3 +794,29 @@
   .retro-president-figure::before { top: 10%; height: 77%; }
   .retro-nav-mobile-links { grid-template-columns: 1fr; }
 }
+
+/* Inner-page continuity and safe membership information. */
+.retro-interior-banner { position: relative; background: #fff0cf; border-bottom: 7px solid var(--retro-red); padding: clamp(34px, 5vw, 65px) 0 clamp(39px, 5vw, 68px); }
+.retro-interior-banner::before { content: ''; position: absolute; inset: 0 0 auto; height: 9px; background: repeating-linear-gradient(135deg, var(--retro-red) 0 12px, transparent 12px 24px); }
+.retro-interior-content { text-align: center; }
+.retro-breadcrumbs { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; font-size: 0.8rem; color: var(--retro-teal); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.retro-breadcrumbs a { color: var(--retro-teal); text-decoration: underline; }
+.retro-interior-banner .retro-section-title { max-width: 920px; margin: 0 auto; }
+.retro-interior-rule { height: 5px; width: 100px; margin: 18px auto 22px; background: var(--retro-teal); }
+.retro-interior-subtitle { max-width: 700px; margin: 0 auto; font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.65; }
+.retro-registration { max-width: 860px; }
+.retro-registration-intro { text-align: center; }
+.retro-registration-intro > p:last-child { max-width: 700px; margin: 24px auto 0; line-height: 1.75; }
+.retro-registration-steps { display: grid; gap: 18px; padding: 0; margin: 45px 0 30px; list-style: none; }
+.retro-registration-steps li { display: flex; gap: 20px; padding: 22px 26px; background: white; border-left: 7px solid var(--retro-red); box-shadow: 5px 5px 0 #dfc2a2; }
+.retro-registration-number { font: 900 2rem/1 var(--retro-display); color: var(--retro-red); }
+.retro-registration-steps h3 { color: var(--retro-teal); font: 900 1.4rem/1.25 var(--retro-display); }
+.retro-registration-steps p { line-height: 1.7; margin-top: 9px; }
+.retro-registration-notice { padding: 24px 26px; border: 2px solid var(--retro-teal); background: #e7f4f2; margin-bottom: 28px; }
+.retro-registration-notice h3 { font: 900 1.25rem/1.3 var(--retro-display); color: var(--retro-teal); }
+.retro-registration-notice p { margin-top: 9px; line-height: 1.7; }
+@media (max-width: 640px) {
+  .retro-breadcrumbs { margin-bottom: 19px; font-size: 0.72rem; }
+  .retro-registration-steps li { gap: 14px; padding: 20px 16px; }
+  .retro-registration-number { font-size: 1.65rem; }
+}

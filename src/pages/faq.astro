@@ -2,6 +2,7 @@
 // src/pages/faq.astro
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/sections/Header.astro';
+import PageIntro from '@/components/sections/PageIntro.astro';
 import { FaqAccordion } from '@/components/islands/FaqAccordion';
 import Footer from '@/components/sections/Footer.astro';
 import { siteConfig } from '@/data/site.config';
@@ -13,15 +14,7 @@ import { siteConfig } from '@/data/site.config';
 >
   <Header />
 
-  <div class="py-6 bg-surface border-b border-border/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <nav class="flex items-center gap-2 text-xs text-muted" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-brand-red transition-colors">Beranda</a>
-        <span>/</span>
-        <span class="text-ink font-semibold">Tanya Jawab (FAQ)</span>
-      </nav>
-    </div>
-  </div>
+  <PageIntro title="Tanya Jawab" description="Pertanyaan umum seputar prinsip, layanan, dan keanggotaan Koperasi Merah Putih." />
 
   <section class="py-14 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
