@@ -15,3 +15,9 @@ At viewport widths of 320, 390, 768, 1000, 1440 and 1920 pixels:
 ### Verifications
 
 CI lint + audit + Astro check + build; capture screenshots from PR #6 workflow and inspect them at true display width. A measured side-by-side of the reference is necessary for any numeric parity conclusion.
+
+## PR #16 CSS and extreme-width QA
+
+Removed obsolete CSS selectors from pre-PR10 welcome layouts (the no-longer-rendered original two-column home, long introduction copy, portrait disc, and portrait-caption styles). Active section components and tokens remain unchanged; selectors were removed only where every selector in that block addressed an obsolete class. This is a narrow dead-style cleanup, not a visual redesign.
+
+New screenshots at **320 × 700** and **1920 × 1080** in the existing Playwright workflow. The PNG validation script requires both exact dimensions. Human review should still check text wrapping, menu keyboard operation, tap targets, and overflow; screenshot existence alone does not prove absence of horizontal scroll.

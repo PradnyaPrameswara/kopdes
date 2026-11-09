@@ -8,6 +8,8 @@ const exact = [
   ['home-reference-1000x563.png', 1000, 563],
   ['home-firstfold-1440x900.png', 1440, 900],
   ['home-firstfold-390x844.png', 390, 844],
+  ['home-firstfold-320x700.png', 320, 700],
+  ['home-firstfold-1920x1080.png', 1920, 1080],
 ];
 
 const fullPage = [
