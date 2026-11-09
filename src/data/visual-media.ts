@@ -1,4 +1,6 @@
-/** Published documentary photos of named cooperatives. External URLs are temporary: clear reuse rights before release. */
+/** Real gerai photographs from Wikimedia Commons with documented reuse licenses.
+ *  Locations are source locations, not verified branches of this website.
+ */
 export interface DocumentaryPhoto {
   title: string;
   caption: string;
@@ -6,57 +8,74 @@ export interface DocumentaryPhoto {
   alt: string;
   credit: string;
   source: string;
+  author: string;
+  license: string;
+  licenseUrl: string;
   objectPosition?: string;
 }
 
 export const storefrontHero: DocumentaryPhoto = {
-  title: 'Gerai Koperasi Merah Putih Bentangan',
-  caption: 'KDMP Bentangan, Wonosari, Klaten',
-  image: 'https://cdn25.metrotvnews.com/dynamic/content/2025/12/22/kpLCQA9j/t_6949607385203.jpg?w=720',
-  alt: 'Bangunan gerai Koperasi Desa Merah Putih Bentangan dengan papan nama merah-putih',
-  credit: 'Metro TV News',
-  objectPosition: 'center 45%',
-  source: 'https://www.metrotvnews.com/read/kpLCQA9j-koperasi-merah-putih-perkuat-tulang-punggung-ekonomi-indonesia',
+  title: 'Koperasi Desa Merah Putih Bentangan',
+  caption: 'Bangunan Koperasi Desa Merah Putih Bentangan, Wonosari, Klaten',
+  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Kopdes_Merah_Putih_Bentangan_Klaten.jpg/1280px-Kopdes_Merah_Putih_Bentangan_Klaten.jpg',
+  alt: 'Foto bangunan Koperasi Desa Merah Putih Bentangan di Klaten dengan papan nama merah putih dan deretan pintu gerai',
+  credit: 'BiographyWriter45 / Wikimedia Commons',
+  author: 'BiographyWriter45',
+  license: 'CC0 1.0',
+  licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  source: 'https://commons.wikimedia.org/wiki/File:Kopdes_Merah_Putih_Bentangan_Klaten.jpg',
+  objectPosition: 'center 43%',
 };
 
 export const cooperativeGallery: DocumentaryPhoto[] = [
   {
-    title: 'Gerai Kebutuhan Pokok',
-    caption: 'Koperasi Merah Putih Bentangan, Klaten',
-    image: 'https://api.kemenpar.go.id/storage/app/resources/image_artikel/FOTO%202%20Koperasi%20Merah%20Putih%20Klaten.jpeg',
-    alt: 'Rak beras, minyak, dan produk pangan di dalam gerai Kopdes Bentangan',
-    credit: 'Kementerian Pariwisata',
-    objectPosition: 'center 52%',
-    source: 'https://kemenpar.go.id/berita/siaran-pers-menteri-pariwisata-koperasi-desa-merah-putih-perkuat-pengelolaan-pariwisata',
-  },
-  {
-    title: 'Gerai Sembako & Layanan',
-    caption: 'Koperasi Kelurahan Merah Putih Banyuanyar, Surakarta',
-    image: 'https://foto.kontan.co.id/P49LsButPA1ah64Ne-PqWXRTQBQ%3D/smart/2025/08/22/1269434997.jpg',
-    alt: 'Gerai Koperasi Kelurahan Merah Putih Banyuanyar dengan rak sembako serta papan klinik dan apotek',
-    credit: 'Kontan',
+    title: 'Koperasi Desa Watualang',
+    caption: 'Bangunan Koperasi Desa Merah Putih Watualang',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Koperasi_Desa_Merah_Putih_Watualang.jpg/1280px-Koperasi_Desa_Merah_Putih_Watualang.jpg',
+    alt: 'Fasad Koperasi Merah Putih Watualang dengan pintu merah dan identitas koperasi di dinding kanan',
+    credit: 'YT Arty / Wikimedia Commons',
+    author: 'YT Arty',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    source: 'https://commons.wikimedia.org/wiki/File:Koperasi_Desa_Merah_Putih_Watualang.jpg',
     objectPosition: 'center 47%',
-    source: 'https://insight.kontan.co.id/news/koperasi-merah-putih-belum-bisa-mengakses-pembiayaan',
   },
   {
-    title: 'Bangunan Gerai Desa',
-    caption: 'Koperasi Desa Merah Putih Ranjeng, Kabupaten Serang',
-    image: 'https://cdn-jpr.jawapos.com/images/22/2026/02/10/image_berita-aa9bfc03-c088-4393-abd2-3fa7ad6d0bb0-1740038381.jpg',
-    alt: 'Fasad gerai Koperasi Desa Merah Putih Ranjeng dengan spanduk koperasi',
-    credit: 'Bali Express / Jawa Pos',
-    objectPosition: 'center center',
-    source: 'https://baliexpress.jawapos.com/kolom/677177378/koperasi-desa-merah-putih-jadi-instrumen-strategis-pengentasan-kemiskinan-berkelanjutan',
+    title: 'Koperasi Merah Putih Mandirancan',
+    caption: 'Bangunan Koperasi Merah Putih Desa Mandirancan, Kebasen, Banyumas',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg/1280px-Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg',
+    alt: 'Bangunan gerai koperasi di Mandirancan, Banyumas, dengan deretan pintu dan halaman terbuka',
+    credit: 'TyoAriSetiadi / Wikimedia Commons',
+    author: 'TyoAriSetiadi',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    source: 'https://commons.wikimedia.org/wiki/File:Koperasi_Merah_Putih_Desa_Mandirancan_Kebasen_Banyumas.jpg',
+    objectPosition: 'center 56%',
   },
   {
-    title: 'Aktivitas Gerai',
-    caption: 'Koperasi Merah Putih Melawai, Jakarta',
-    image: 'https://cdn1.katadata.co.id/media/images/2025/10/17/Koperasi_Merah_Putih_Melawai_Foto_KatadataFauza-2025_10_17-14_30_51_13ddca90c056985546a487f8795240b3.jpg',
-    alt: 'Petugas sedang menata produk pangan di rak gerai Koperasi Merah Putih Melawai',
-    credit: 'Katadata',
-    source: 'https://katadata.co.id/foto/68f1f1c18dd5e/foto-koperasi-merah-putih-melawai-hadirkan-sembako-dengan-harga-terjangkau',
+    title: 'Koperasi Desa Tambakboyo',
+    caption: 'Bangunan Koperasi Desa Merah Putih Tambakboyo, Pedan, Klaten',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Tambakboyo%2C_Pedan%2C_Klaten_%28difoto_sore_25_Oktober_2026%29.jpg',
+    alt: 'Foto bangunan Koperasi Merah Putih Tambakboyo di Pedan dengan papan nama pada fasad',
+    credit: 'Dani Safa Adi Nugraha / Wikimedia Commons',
+    author: 'Dani Safa Adi Nugraha',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    source: 'https://commons.wikimedia.org/wiki/File:Koperasi_Desa_Merah_Putih_Tambakboyo,_Pedan,_Klaten_(difoto_sore_25_Oktober_2026).jpg',
+    objectPosition: 'center 47%',
+  },
+  {
+    title: 'Koperasi Desa Kwarasan',
+    caption: 'Bangunan Koperasi Desa Merah Putih Kwarasan, Juwiring, Klaten',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg/1280px-Koperasi_Desa_Merah_Putih_Kwarasan%2C_Juwiring%2C_Klaten_%28difoto_jam_17.01_tanggal_31_Oktober_2026%29.jpg',
+    alt: 'Bangunan Koperasi Desa Merah Putih Kwarasan di tengah area pertanian dengan langit sore',
+    credit: 'Dani Safa Adi Nugraha / Wikimedia Commons',
+    author: 'Dani Safa Adi Nugraha',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    source: 'https://commons.wikimedia.org/wiki/File:Koperasi_Desa_Merah_Putih_Kwarasan,_Juwiring,_Klaten_(difoto_jam_17.01_tanggal_31_Oktober_2026).jpg',
+    objectPosition: 'center 51%',
   },
 ];
 
-// Keep the feature image coupled to its real location, publisher and original
-// caption. PR #10 places this in the reference-sized central media panel.
 export const featuredDocumentary: DocumentaryPhoto = cooperativeGallery[0];
