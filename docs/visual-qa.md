@@ -20,3 +20,7 @@ All screenshots are available as the `kopdes-responsive-snapshots` artifact of t
 5. Verify remote photo permissions and replace with licensed local originals before release; publisher image URLs are temporary.
 
 The user requested KOPDES content, KOPDES color palette, and a visual **layout adaptation**, not copied restaurant-specific words, logos, or a fabricated endorsement. All original routes should remain reachable.
+
+## Screenshot findings, November 9, 2026
+
+The first successful Chrome screenshots exposed blank history and gallery images, even though the URLs were retrievable by another web client. This is an external hotlink/availability issue, **not** evidence that the photographs depict the wrong locations. The follow-up PR adds an accessible, honest fallback to the documented Bentangan storefront image; when triggered, the caption and source URL change to match that alternate photo. A single repeated storefront is preferable to falsely describing an unavailable image, but production still requires authorized locally hosted photos of each intended site.

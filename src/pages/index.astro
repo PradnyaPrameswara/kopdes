@@ -4,7 +4,7 @@ import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { Image } from 'astro:assets';
 import prabowoPortrait from '@/assets/photos/presiden-prabowo-hormat.webp';
-import { cooperativeGallery } from '@/data/visual-media';
+import { cooperativeGallery, storefrontHero } from '@/data/visual-media';
 
 const featuredPhotos = cooperativeGallery;
 
@@ -93,6 +93,11 @@ const units = [
           <img
             src={featuredPhotos[0].image}
             alt={featuredPhotos[0].alt}
+            data-documented-image
+            data-fallback-src={storefrontHero.image}
+            data-fallback-alt={storefrontHero.alt}
+            data-fallback-source={storefrontHero.source}
+            data-fallback-credit={storefrontHero.credit}
             width="720"
             height="480"
             loading="lazy"
@@ -148,7 +153,19 @@ const units = [
           {featuredPhotos.map((photo) => (
             <figure class="retro-gallery-item">
               <a href={photo.source} target="_blank" rel="noopener noreferrer" aria-label={'Lihat sumber foto ' + photo.title}>
-                <img src={photo.image} alt={photo.alt} width="720" height="480" loading="lazy" decoding="async" />
+                <img
+                  src={photo.image}
+                  alt={photo.alt}
+                  data-documented-image
+                  data-fallback-src={storefrontHero.image}
+                  data-fallback-alt={storefrontHero.alt}
+                  data-fallback-source={storefrontHero.source}
+                  data-fallback-credit={storefrontHero.credit}
+                  width="720"
+                  height="480"
+                  loading="lazy"
+                  decoding="async"
+                />
               </a>
               <figcaption>
                 <strong>{photo.title}</strong>
@@ -175,4 +192,45 @@ const units = [
   </div>
 
   <Footer />
+  <script>
+    // Publishers may refuse hotlinked images. Keep the layout populated with a
+    // verified alternate documentary photograph rather than a misleading blank.
+    const documentaryImages = document.querySelectorAll<HTMLImageElement>('img[data-documented-image]');
+
+    for (const image of documentaryImages) {
+      const applyFallback = () => {
+        if (image.dataset.fallbackApplied === 'true') return;
+
+        const source = image.dataset.fallbackSrc;
+        if (!source) return;
+
+        image.dataset.fallbackApplied = 'true';
+        image.src = source;
+        image.alt = image.dataset.fallbackAlt ?? 'Foto dokumentasi gerai Koperasi Merah Putih Bentangan';
+
+        const credit = image.dataset.fallbackCredit ?? 'Penerbit dokumentasi';
+        const sourceLink = image.dataset.fallbackSource ?? '';
+        const caption = image.closest('figure')?.querySelector('figcaption');
+
+        if (!caption) return;
+
+        const name = document.createElement('strong');
+        name.textContent = 'Foto alternatif: KDMP Bentangan';
+        const place = document.createElement('span');
+        place.textContent = 'Foto sumber utama tidak tersedia';
+        const link = document.createElement('a');
+        link.href = sourceLink;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Sumber: ' + credit;
+        caption.replaceChildren(name, place, link);
+
+        const parentLink = image.closest('a');
+        if (parentLink) parentLink.href = sourceLink;
+      };
+
+      image.addEventListener('error', applyFallback, { once: true });
+      if (image.complete && image.naturalWidth === 0) applyFallback();
+    }
+  </script>
 </Layout>
