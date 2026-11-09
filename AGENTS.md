@@ -9,7 +9,7 @@ All agents must strictly follow rules, constraints, patterns, workflows here.
 ## 1. Project Overview & Mission
 
 - **Project:** Koperasi Desa/Kelurahan Merah Putih Landing Page (`kopdes-merah-putih`).
-- **Core Concept:** High-trust, high-performance single-page landing site for Kopdes Merah Putih: modern village retail, cooperative hub (gotong royong), cheap staples, pharmacy/clinic, cold storage, farm logistics, member registration.
+- **Core Concept:** Independent eight-route informational concept of the Koperasi Desa/Kelurahan Merah Putih program; documentary photos and example service types, not a verified operating cooperative or membership system.
 - **Language & Locale:** Indonesian (`id-ID`).
 - **Target Audience:** Villagers, local farmers, village MSMEs (UMKM), village heads, cooperative stakeholders.
 - **Performance & Quality Targets:**
@@ -26,7 +26,7 @@ All agents must strictly follow rules, constraints, patterns, workflows here.
 | **Framework** | **Astro** (latest stable) | Static site generation (SSG) default; no client JS unless island explicitly needed. |
 | **Interactive Islands** | **React** (latest stable) | React islands strictly scoped via `client:visible`, `client:media`, `client:idle`. Never hydrate whole pages. |
 | **Styling** | **Tailwind CSS v4** | Modern CSS-first architecture via `@tailwindcss/vite` in `astro.config.ts`. `@import "tailwindcss";` and `@theme` tokens in `src/styles/global.css`. |
-| **UI Components** | **shadcn/ui (Base UI variant)** | Primitives built on **Base UI** (`@base-ui-components/react`). **STRICTLY NO RADIX UI**. |
+| **UI Components** | **shadcn/ui (Base UI variant)** | Primitives built on **Base UI** (`@base-ui/react`). **STRICTLY NO RADIX UI**. |
 | **Type System** | **TypeScript** | Strict mode (`astro/tsconfigs/strict`). No `any`, no implicit types. |
 | **Icons** | **lucide-react** | SVG icons only. No emoji icons. |
 | **Typography** | **Fontsource Variable** | Self-hosted `@fontsource-variable/plus-jakarta-sans` & `@fontsource-variable/inter`. `font-display: swap`. |
@@ -91,8 +91,8 @@ Defined in `src/styles/global.css`:
 
 ### 4.2 Asset Quality Standards
 - **Logo:** `src/assets/brand/logo-kopdes.png` must be high-resolution transparent PNG (alpha channel, width ≥ 1200px), no white box or fringing. Must stay crisp on white and red backgrounds.
-- **Store & Section Photos:** Longest edge ≥ 1920px (hero photo ≥ 2400px). Store originals in `assets-source/` (not bundled).
-- **Astro Image Pipeline:** Always use Astro `<Picture>` or `<Image>` components for modern formats (AVIF, WebP) with responsive `srcset` and explicit `width`/`height`.
+- **Documentary Photos:** Real named Commons locations with source/license metadata; 640px and 1280px WebP local renditions are in `public/images/documentary/`.
+- **Image Delivery:** Use Astro `<Image>` for imported bundled assets, and local WebP `srcset` with explicit intrinsic dimensions for `public/` documentary photographs.
 - **Loading Strategy:** Hero image uses `loading="eager"` + `fetchpriority="high"`. Below-the-fold images use `loading="lazy"`.
 - **Credits & Ethics:** Document photo sources, authors, licenses in `docs/assets-credits.md`. If demo or unverified local instance, include footer disclaimer: *"Website ini bukan situs resmi pemerintah."*
 
