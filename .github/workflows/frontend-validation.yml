@@ -24,3 +24,4 @@ jobs:
       - run: pnpm check
       - run: pnpm build
       - run: pnpm audit:site
+      - run: pnpm audit:release
