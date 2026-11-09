@@ -1087,7 +1087,8 @@
   .retro-nav-desktop a { padding: 6px 9px; font-size: 0.74rem; line-height: 1.1; }
   .retro-home .retro-welcome { padding-top: 11px; }
   .retro-reference-stage { width: min(calc(100% - 34px), 45vw); }
-  .retro-home .retro-welcome-heading { text-align: center; }
+  .retro-home .retro-welcome-heading { text-align: center; text-wrap: balance; }
+  .retro-home .retro-promise p { overflow-wrap: break-word; }
   .retro-reference-intro { min-height: clamp(145px, 14.5vw, 210px); }
   .retro-home .retro-president-photo { width: 100%; max-width: 100%; height: clamp(145px, 14.5vw, 210px); object-position: center bottom; }
   .retro-home .retro-welcome-text { height: clamp(145px, 14.5vw, 210px); justify-content: flex-start; padding: 0; }

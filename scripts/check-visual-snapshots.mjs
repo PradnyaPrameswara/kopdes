@@ -7,6 +7,7 @@ const snapshotDirectory = 'screenshots';
 const exact = [
   ['home-reference-1000x563.png', 1000, 563],
   ['home-firstfold-1440x900.png', 1440, 900],
+  ['home-firstfold-1280x720.png', 1280, 720],
   ['home-firstfold-390x844.png', 390, 844],
   ['home-firstfold-320x700.png', 320, 700],
   ['home-firstfold-1920x1080.png', 1920, 1080],
@@ -99,6 +100,24 @@ async function inspectReferenceGeometry() {
       failed = true;
     } else {
       console.log('PASS ' + anchor.name);
+    }
+  }
+
+  // Observed in the 1000x563 Chromium baseline: a 450px media panel
+  // starts at x=275 and ends at x=725, with a teal border at y=398.
+  const edgeAnchors = [
+    { name: 'left outer paper', x: 274, y: 398, rgb: [255, 240, 207] },
+    { name: 'left media border', x: 275, y: 398, rgb: [2, 63, 80] },
+    { name: 'right media border', x: 724, y: 398, rgb: [2, 63, 80] },
+    { name: 'right outer paper', x: 725, y: 398, rgb: [255, 240, 207] },
+  ];
+
+  for (const anchor of edgeAnchors) {
+    if (!near(pixelAt(anchor.x, anchor.y), anchor.rgb, 1)) {
+      console.error('FAIL desktop media edge: ' + anchor.name);
+      failed = true;
+    } else {
+      console.log('PASS desktop media edge: ' + anchor.name);
     }
   }
 
