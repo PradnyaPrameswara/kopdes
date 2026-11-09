@@ -19,7 +19,8 @@ const {
   image = '/images/brand/logo-kopdes.webp',
   canonicalURL = Astro.url.href,
   type = 'website',
-  noindex = false,
+  // This remains an independent concept; publication requires separate authorization.
+  noindex = true,
 } = Astro.props;
 
 const siteUrl = siteConfig.meta.siteUrl;
