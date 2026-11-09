@@ -24,4 +24,5 @@ jobs:
       - run: pnpm check
       - run: pnpm build
       - run: pnpm audit:site
+      - run: node scripts/check-asset-budgets.mjs
       - run: pnpm audit:release

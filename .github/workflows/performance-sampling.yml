@@ -1,0 +1,58 @@
+name: Lighthouse evidence (mobile)
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.ts'
+      - 'scripts/**'
+      - '.github/workflows/performance-sampling.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: node scripts/check-asset-budgets.mjs
+      - name: Start static preview
+        run: |
+          pnpm preview --host 127.0.0.1 --port 4321 > /tmp/kopdes-lighthouse-preview.log 2>&1 &
+          for attempt in $(seq 1 40); do
+            if curl --silent --fail http://127.0.0.1:4321/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/kopdes-lighthouse-preview.log
+          exit 1
+      - name: Install Chromium
+        run: pnpm dlx playwright@1.56.1 install --with-deps chromium
+      - name: Capture mobile Lighthouse evidence
+        run: |
+          mkdir -p reports
+          CHROME_PATH="$(command -v google-chrome || true)"
+          if [ -z "$CHROME_PATH" ]; then CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -type f -name chrome -print -quit)"; fi
+          test -x "$CHROME_PATH"
+          export CHROME_PATH
+          pnpm dlx lighthouse@12.8.2 http://127.0.0.1:4321/ --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=reports/lighthouse-home-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+          node scripts/summarize-lighthouse.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kopdes-lighthouse-evidence
+          path: reports/
+          retention-days: 7
+          if-no-files-found: warn
