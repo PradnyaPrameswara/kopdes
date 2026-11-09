@@ -19,7 +19,7 @@ KOPDES colors: #B91C1C red, #065366 teal, #FFF0CF warm light accent, #FFFAF0 pap
 ## Asset / editorial constraints
 
 - Existing local transparent portrait of President Prabowo is used; no fabricated photo or quotation.
-- Storefront / gallery images are authentic photographs credited to the cited publishers; currently external URLs, which require a separate usage-rights / availability check before publication.
+- Storefront / gallery images are verified photographs of named cooperatives, centrally listed in `src/data/visual-media.ts`. They are temporary externally hosted URLs: verify permission and move authorized originals to local optimized assets before production. Broken URL placeholders were replaced.
 - Photos represent **different cooperatives**, not the fictional 'Desa Makmur' address still present in older site data.
 - Information on individual service eligibility, actual branches, prices, guarantees, opening hours, or membership fees must be verified by real cooperative operators.
 - The /daftar page still transmits NIK in a WhatsApp URL. It must be redesigned for data protection before real personal data is collected.

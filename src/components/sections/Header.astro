@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '@/assets/brand/logo-kopdes.webp';
+import { storefrontHero } from '@/data/visual-media';
 
 const navigation = [
   { label: 'Beranda', href: '/' },
@@ -19,8 +20,8 @@ const currentPath = Astro.url.pathname;
   <div class="retro-masthead">
     <img
       class="retro-masthead-photo"
-      src="https://cdn25.metrotvnews.com/dynamic/content/2025/12/22/kpLCQA9j/t_6949607385203.jpg?w=720"
-      alt="Foto dokumentasi gerai Koperasi Desa Merah Putih Bentangan, Kecamatan Wonosari"
+      src={storefrontHero.image}
+      alt={storefrontHero.alt}
       width="720"
       height="480"
       decoding="async"
@@ -39,7 +40,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
     </div>
-    <a class="retro-hero-photo-credit" href="https://www.metrotvnews.com/read/kpLCQA9j-koperasi-merah-putih-perkuat-tulang-punggung-ekonomi-indonesia" target="_blank" rel="noopener noreferrer">Foto dokumentasi: Metro TV News</a>
+    <a class="retro-hero-photo-credit" href={storefrontHero.source} target="_blank" rel="noopener noreferrer">Foto dokumentasi: {storefrontHero.credit}</a>
   </div>
   <nav class="retro-nav" aria-label="Navigasi utama">
     <div class="retro-nav-desktop">
