@@ -4,41 +4,9 @@ import Header from '@/components/sections/Header.astro';
 import Footer from '@/components/sections/Footer.astro';
 import { Image } from 'astro:assets';
 import prabowoPortrait from '@/assets/photos/presiden-prabowo-hormat.webp';
+import { cooperativeGallery } from '@/data/visual-media';
 
-const featuredPhotos = [
-  {
-    title: 'Gerai Sembako',
-    caption: 'Koperasi Desa Merah Putih Bentangan, Wonosari',
-    image: 'https://cdn25.metrotvnews.com/dynamic/content/2025/12/22/kpLCQA9j/t_6949607385203.jpg?w=720',
-    alt: 'Dokumentasi gerai sembako Koperasi Merah Putih Bentangan',
-    credit: 'Metro TV News',
-    source: 'https://www.metrotvnews.com/read/kpLCQA9j-koperasi-merah-putih-perkuat-tulang-punggung-ekonomi-indonesia',
-  },
-  {
-    title: 'Pelayanan Koperasi',
-    caption: 'Koperasi Desa Merah Putih Hutadaa, Gorontalo',
-    image: 'https://infopublik.id/assets/upload/headline/Widya.jpg',
-    alt: 'Kegiatan kunjungan pada gerai Koperasi Desa Merah Putih Hutadaa',
-    credit: 'InfoPublik',
-    source: 'https://infopublik.id/kategori/prioritas-nasional/930456/bpsdm-gorontalo-replikasi-keberhasilan-koperasi-merah-putih-hutadaa',
-  },
-  {
-    title: 'Toko Kebutuhan Desa',
-    caption: 'Koperasi Desa Merah Putih Ranjeng, Kabupaten Serang',
-    image: 'https://cdn-jpr.jawapos.com/images/22/2026/02/10/image_berita-aa9bfc03-c088-4393-abd2-3fa7ad6d0bb0-1740038381.jpg',
-    alt: 'Toko Koperasi Desa Merah Putih Ranjeng dengan papan nama merah putih',
-    credit: 'Bali Express / Jawa Pos',
-    source: 'https://baliexpress.jawapos.com/kolom/677177378/koperasi-desa-merah-putih-jadi-instrumen-strategis-pengentasan-kemiskinan-berkelanjutan',
-  },
-  {
-    title: 'Fasilitas Pelayanan',
-    caption: 'Koperasi Desa Merah Putih Sinduadi, Sleman',
-    image: 'https://media.telisik.id/assets/img/news/2025/12/dana_desa_2026_bisa_cair_melalui_koperasi_desa_merah_putih_begini_skema_dan_alur_penyalurannya.webp',
-    alt: 'Foto bersama di depan bangunan Koperasi Desa Merah Putih Sinduadi',
-    credit: 'Telisik',
-    source: 'https://telisik.id/news/dana-desa-2026-bisa-cair-melalui-koperasi-desa-merah-putih-begini-skema-dan-alur-penyalurannya',
-  },
-];
+const featuredPhotos = cooperativeGallery;
 
 const values = [
   { number: '01', title: 'Gotong Royong', description: 'Membangun usaha bersama agar manfaat ekonomi kembali kepada masyarakat desa.' },
