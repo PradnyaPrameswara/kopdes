@@ -1095,10 +1095,11 @@
     align-self: end;
   }
   .retro-home .retro-president-photo {
-    width: 140%;
-    max-width: none;
-    height: clamp(175px, 50vw, 225px);
-    object-position: left bottom;
+    width: 100%;
+    max-width: 100%;
+    height: clamp(150px, 44vw, 195px);
+    object-fit: contain;
+    object-position: center bottom;
     margin: 0;
   }
   .retro-home .retro-welcome-text {
