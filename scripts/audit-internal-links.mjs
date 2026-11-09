@@ -21,9 +21,11 @@ for (const route of routes) {
       const [pathname, hash] = url.split('#');
       const clean = pathname.split('?')[0];
       const target = clean === '/' ? 'dist/index.html' : join('dist', clean.replace(/^[/]+/, ''));
+
       const resolved = clean.endsWith('/') || !clean.includes('.', clean.lastIndexOf('/') + 1)
         ? join(target, 'index.html')
         : target;
+
       const correct = clean === '/' ? 'dist/index.html' : resolved;
 
       if (!existsSync(correct)) failures.push((route || 'home') + ': missing internal target ' + url);
