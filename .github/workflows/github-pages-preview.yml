@@ -1,6 +1,17 @@
-name: Publish explicitly approved KOPDES Pages preview
+name: Publish KOPDES GitHub Pages preview
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.ts'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/github-pages-preview.yml'
   workflow_dispatch:
     inputs:
       public_preview_approved:
@@ -20,7 +31,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/main' && inputs.public_preview_approved == true
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.public_preview_approved == true)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +55,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.ref == 'refs/heads/main' && inputs.public_preview_approved == true
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.public_preview_approved == true)
     needs: build
     runs-on: ubuntu-24.04
     environment:
