@@ -25,7 +25,14 @@ try {
 
       const result = await page.evaluate(() => {
         const visible = (element) => element.getClientRects().length > 0;
-        const isBroken = (image) => visible(image) && (!image.complete || image.naturalWidth === 0);
+
+        const isBroken = (image) => {
+          const box = image.getBoundingClientRect();
+          const aboveFold = box.bottom > 0 && box.top < window.innerHeight;
+
+          return visible(image) && aboveFold && (!image.complete || image.naturalWidth === 0);
+        };
+
         const focusables = [...document.querySelectorAll('a, button, input, summary')].filter(visible);
 
         const clipped = focusables.filter((element) => {
