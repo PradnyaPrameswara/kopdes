@@ -232,12 +232,6 @@
   text-shadow: 2px 2px 0 rgb(255 255 255 / 80%);
 }
 
-.retro-welcome-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(290px, 0.9fr);
-  align-items: end;
-  gap: clamp(18px, 4vw, 56px);
-}
 
 .retro-welcome-text {
   padding: 35px 0 70px;
@@ -245,19 +239,6 @@
   text-align: center;
 }
 
-.retro-lead {
-  font-family: var(--retro-display);
-  font-weight: 800;
-  line-height: 1.24;
-  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
-  color: var(--retro-teal);
-}
-
-.retro-welcome-detail {
-  font-size: clamp(1rem, 1.35vw, 1.15rem);
-  line-height: 1.75;
-  margin-top: 24px;
-}
 
 .retro-promise {
   margin: 29px auto 18px;
@@ -284,14 +265,6 @@
   font-weight: 900;
 }
 
-.retro-welcome-sign {
-  color: var(--retro-teal);
-  font-size: 0.82rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin: 26px 0 17px;
-}
 
 .retro-actions {
   display: flex;
@@ -350,17 +323,6 @@
   isolation: isolate;
 }
 
-.retro-portrait-disc {
-  position: absolute;
-  z-index: -1;
-  width: min(100%, 420px);
-  aspect-ratio: 1;
-  top: 68px;
-  border: 12px solid #fff;
-  border-radius: 50%;
-  background: #e4b865;
-  box-shadow: 0 0 0 7px var(--retro-red);
-}
 
 .retro-president-photo {
   display: block;
@@ -371,43 +333,6 @@
   margin-top: auto;
 }
 
-.retro-portrait-caption {
-  position: relative;
-  width: min(100%, 460px);
-  z-index: 1;
-  background: var(--retro-teal);
-  border-top: 5px solid var(--retro-red);
-  color: #fff;
-  padding: 12px 14px 14px;
-  text-align: center;
-}
-
-.retro-portrait-caption strong,
-.retro-portrait-caption span,
-.retro-portrait-caption small {
-  display: block;
-}
-
-.retro-portrait-caption strong {
-  font-family: var(--retro-display);
-  font-size: 1.6rem;
-  line-height: 1.2;
-}
-
-.retro-portrait-caption span {
-  font-size: 0.81rem;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 3px;
-}
-
-.retro-portrait-caption small {
-  font-size: 0.65rem;
-  line-height: 1.4;
-  opacity: 0.9;
-  margin-top: 8px;
-}
 
 /* Alternating editorial sections and simple vintage accents. */
 .retro-section {
@@ -660,7 +585,7 @@
   .retro-nav-mobile-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgb(255 255 255 / 25%); }
   .retro-nav-mobile-links a { padding: 13px 18px; color: white; font-size: 0.88rem; font-weight: 750; text-decoration: none; border-bottom: 1px solid rgb(255 255 255 / 20%); }
   .retro-nav-mobile-links a:hover { background: var(--retro-red); }
-  .retro-welcome-grid { grid-template-columns: 1fr 0.8fr; gap: 15px; }
+
   .retro-welcome-text { padding-bottom: 36px; }
   .retro-president-figure { min-height: 450px; }
   .retro-president-photo { height: 370px; }
@@ -678,15 +603,13 @@
   .retro-page-container { width: min(100% - 32px, 1120px); }
   .retro-welcome { padding-top: 54px; }
   .retro-welcome-heading { font-size: clamp(2.6rem, 11vw, 3.6rem); }
-  .retro-welcome-grid { display: flex; flex-direction: column; gap: 0; }
+
   .retro-welcome-text { padding: 14px 0 32px; order: 2; }
   .retro-president-figure { order: 1; width: 100%; min-height: 370px; max-width: 380px; margin: 0 auto; }
-  .retro-portrait-disc { width: min(78vw, 295px); top: 25px; border-width: 9px; }
+
   .retro-president-photo { height: 305px; width: min(100%, 345px); }
-  .retro-portrait-caption { padding: 9px 9px 11px; }
-  .retro-portrait-caption strong { font-size: 1.35rem; }
-  .retro-lead { font-size: 1.65rem; }
-  .retro-welcome-detail { margin-top: 16px; }
+
+
   .retro-story-grid, .retro-values-grid, .retro-unit-grid { grid-template-columns: 1fr; }
   .retro-story-photo { max-width: 500px; box-shadow: 6px 6px 0 var(--retro-teal); }
   .retro-section { padding: 58px 0; }
@@ -731,10 +654,7 @@
   margin-bottom: 3px;
   text-transform: uppercase;
 }
-.retro-welcome-grid {
-  grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
-  gap: clamp(16px, 2.3vw, 36px);
-}
+
 .retro-welcome-text {
   position: relative;
   z-index: 2;
@@ -742,10 +662,7 @@
   padding-bottom: 70px;
   text-align: center;
 }
-.retro-lead {
-  max-width: 550px;
-  margin: 0 auto;
-}
+
 .retro-president-figure {
   min-height: 535px;
   overflow: visible;
@@ -769,25 +686,19 @@
   object-position: bottom center;
   object-fit: contain;
 }
-.retro-portrait-caption {
-  width: min(100%, 450px);
-  background: var(--retro-teal);
-  border-top: 5px solid var(--retro-red);
-}
+
 @media (max-width: 900px) {
   .retro-nav-mobile-links {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .retro-welcome-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-  }
+
   .retro-welcome-text { padding-top: 28px; }
   .retro-president-figure { min-height: 435px; }
   .retro-president-photo { height: 365px; }
 }
 @media (max-width: 640px) {
   .retro-welcome-heading { margin-bottom: 16px; }
-  .retro-welcome-grid { display: flex; flex-direction: column; }
+
   .retro-welcome-text { order: 2; padding: 25px 0 40px; }
   .retro-president-figure { order: 1; min-height: 380px; }
   .retro-president-photo { height: 313px; }

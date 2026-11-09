@@ -46,6 +46,8 @@ jobs:
           pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="1000,563" --wait-for-timeout=1800 http://127.0.0.1:4321/ screenshots/home-reference-1000x563.png
           pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="1440,900" --wait-for-timeout=1800 http://127.0.0.1:4321/ screenshots/home-firstfold-1440x900.png
           pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="390,844" --wait-for-timeout=1800 http://127.0.0.1:4321/ screenshots/home-firstfold-390x844.png
+          pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="320,700" --wait-for-timeout=1800 http://127.0.0.1:4321/ screenshots/home-firstfold-320x700.png
+          pnpm dlx playwright@1.56.1 screenshot --browser=chromium --viewport-size="1920,1080" --wait-for-timeout=1800 http://127.0.0.1:4321/ screenshots/home-firstfold-1920x1080.png
       # Tall viewport triggers lazy below-fold photography while preserving width breakpoints.
       - name: Capture representative desktop, tablet, and mobile pages
         run: |
